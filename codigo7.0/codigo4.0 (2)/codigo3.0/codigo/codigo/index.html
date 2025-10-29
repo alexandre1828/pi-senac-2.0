@@ -1,0 +1,3322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELP VAREJO - Comunidade de Suporte</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sistema de Autenticação -->
+<div id="authSystem" style="display: none;">
+    <main class="container-autenticacao">
+        <!-- Tela de Login -->
+        <section id="secaoLogin" class="secao-formulario">
+            <header class="cabecalho-marca">
+                <div class="logo-marca">🔐</div>
+                <h1 class="titulo-marca">Bem-vindo</h1>
+                <p class="subtitulo-marca">Acesse sua conta para continuar</p>
+            </header>
+            
+            <form id="formularioLogin">
+                <div class="grupo-formulario">
+                    <label for="emailLogin" class="rotulo-formulario">Email</label>
+                    <input type="email" id="emailLogin" class="entrada-formulario" required>
+                    <div class="mensagem-erro" id="erroEmailLogin"></div>
+                </div>
+                
+                <div class="grupo-formulario">
+                    <label for="senhaLogin" class="rotulo-formulario">Senha</label>
+                    <input type="password" id="senhaLogin" class="entrada-formulario" required>
+                    <div class="mensagem-erro" id="erroSenhaLogin"></div>
+                </div>
+                
+                <div class="grupo-caixa-selecao">
+                    <input type="checkbox" id="lembrarDeMim" class="caixa-selecao">
+                    <label for="lembrarDeMim" class="rotulo-caixa-selecao">Lembrar de mim</label>
+                </div>
+                
+                <button type="submit" class="botao botao-principal" id="botaoLogin">
+                    Entrar
+                </button>
+            </form>
+            
+            <div class="texto-centralizado">
+                <a href="#" class="link" onclick="mostrarEsqueciSenha()">Esqueci minha senha</a>
+            </div>
+            
+            <div class="divisor">
+                <span>ou</span>
+            </div>
+            
+            <button type="button" class="botao botao-secundario" onclick="mostrarRegistro()">
+                Criar nova conta
+            </button>
+        </section>
+
+        <!-- Tela de Cadastro -->
+        <section id="secaoRegistro" class="secao-formulario oculto">
+            <header class="cabecalho-marca">
+                <div class="logo-marca">📝</div>
+                <h1 class="titulo-marca">Criar Conta</h1>
+                <p class="subtitulo-marca">Preencha os dados para se cadastrar</p>
+            </header>
+            
+            <form id="formularioRegistro">
+                <div class="grupo-formulario">
+                    <label for="nomeRegistro" class="rotulo-formulario">Nome completo</label>
+                    <input type="text" id="nomeRegistro" class="entrada-formulario" required>
+                    <div class="mensagem-erro" id="erroNomeRegistro"></div>
+                </div>
+                
+                <div class="grupo-formulario">
+                    <label for="emailRegistro" class="rotulo-formulario">Email</label>
+                    <input type="email" id="emailRegistro" class="entrada-formulario" required>
+                    <div class="mensagem-erro" id="erroEmailRegistro"></div>
+                </div>
+                
+                <div class="grupo-formulario">
+                    <label for="senhaRegistro" class="rotulo-formulario">Senha</label>
+                    <input type="password" id="senhaRegistro" class="entrada-formulario" required>
+                    <div class="forca-senha" id="forcaSenha">
+                        <div class="barra-forca">
+                            <div class="preenchimento-forca" id="preenchimentoForca"></div>
+                        </div>
+                        <div class="texto-forca" id="textoForca"></div>
+                    </div>
+                    <div class="mensagem-erro" id="erroSenhaRegistro"></div>
+                </div>
+                
+                <div class="grupo-formulario">
+                    <label for="confirmarSenha" class="rotulo-formulario">Confirmar senha</label>
+                    <input type="password" id="confirmarSenha" class="entrada-formulario" required>
+                    <div class="mensagem-erro" id="erroConfirmarSenha"></div>
+                </div>
+                
+                <div class="grupo-caixa-selecao">
+                    <input type="checkbox" id="concordarTermos" class="caixa-selecao" required>
+                    <label for="concordarTermos" class="rotulo-caixa-selecao">
+                        Concordo com os <a href="#" class="link">Termos de Uso</a> e <a href="#" class="link">Política de Privacidade</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="botao botao-principal" id="botaoRegistro">
+                    Criar conta
+                </button>
+            </form>
+            
+            <div class="texto-centralizado" style="margin-top: 24px;">
+                <span style="color: #718096;">Já tem uma conta? </span>
+                <a href="#" class="link" onclick="mostrarLogin()">Fazer login</a>
+            </div>
+        </section>
+
+        <!-- Tela de Recuperação de Senha -->
+        <section id="secaoEsqueciSenha" class="secao-formulario oculto">
+            <button class="botao-voltar" onclick="mostrarLogin()">Voltar</button>
+            
+            <header class="cabecalho-marca">
+                <div class="logo-marca">🔑</div>
+                <h1 class="titulo-marca">Recuperar Senha</h1>
+                <p class="subtitulo-marca">Digite seu email para receber as instruções</p>
+            </header>
+            
+            <form id="formularioEsqueciSenha" class="formulario-esqueci-senha">
+                <div class="grupo-formulario">
+                    <label for="emailEsqueci" class="rotulo-formulario">Email</label>
+                    <input type="email" id="emailEsqueci" class="entrada-formulario" required>
+                    <div class="mensagem-erro" id="erroEmailEsqueci"></div>
+                </div>
+                
+                <button type="submit" class="botao botao-principal" id="botaoEsqueci">
+                    Enviar instruções
+                </button>
+            </form>
+        </section>
+
+        <!-- Tela de Acesso Bloqueado -->
+        <section id="secaoAcessoBloqueado" class="secao-formulario oculto">
+            <header class="cabecalho-marca">
+                <div class="logo-marca">🚫</div>
+                <h1 class="titulo-marca">Acesso Bloqueado</h1>
+                <p class="subtitulo-marca">Usuário não cadastrado no sistema</p>
+            </header>
+            
+            <div class="alerta-erro">
+                Este email não está cadastrado em nosso sistema. Por favor, crie uma conta para acessar.
+            </div>
+            
+            <div class="texto-centralizado">
+                <p style="color: #718096; margin-bottom: 24px;">
+                    Você precisa se cadastrar antes de acessar o sistema.
+                </p>
+                
+                <button type="button" class="botao botao-principal" onclick="mostrarRegistro()">
+                    Criar Nova Conta
+                </button>
+                
+                <button type="button" class="botao botao-secundario" onclick="mostrarLogin()">
+                    Tentar Outro Email
+                </button>
+            </div>
+        </section>
+    </main>
+</div>
+
+    <div class="main-container">
+        <!-- Header Principal -->
+        <div class="top-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">📑</div>
+                    <div class="logo-text">
+                        <h1>HELP ADM</h1>
+                        <p>Comunidade de Suporte e Ajuda</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="Buscar conversas, tópicos...">
+                        <button class="search-btn">🔍</button>
+                    </div>
+                    <button class="user-menu">
+                        👤 Minha Conta
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegação -->
+        <div class="navigation-bar">
+            <div class="nav-menu">
+                <button class="nav-item active" data-section="home">🏠 Início</button>
+                <button class="nav-item" data-section="discussions">💬 Chat</button>
+                <button class="nav-item" data-section="help">🎥 Vídeos Aulas</button>
+                <button class="nav-item" data-section="tutorials">📚 Treinamento</button>
+                <button class="nav-item" data-section="community">👥 Comunidade</button>
+                <button class="nav-item" data-section="announcements">📢 Anúncios</button>
+                <button class="nav-item" data-section="help">❓ Dúvidas Gerais</button>
+
+            </div>
+        </div>
+
+        <!-- Área de Conteúdo -->
+        <div class="content-area">
+            <!-- Conteúdo Principal -->
+            <div class="main-content">
+                <!-- Seção Início -->
+                <div id="home" class="section-content active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">2.5K</div>
+                            <div class="stat-label">Membros Ativos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">847</div>
+                            <div class="stat-label">Conversas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3.2K</div>
+                            <div class="stat-label">Respostas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">156</div>
+                            <div class="stat-label">Online Agora</div>
+                        </div>
+                    </div>
+
+                    <h2>🔥 Tópicos Populares</h2>
+                    <div class="topic-grid">
+                        <div class="topic-card" data-topic="suporte-tecnico">
+                            <div class="topic-header">
+                                <div class="topic-icon">🔧</div>
+                                <div class="topic-info">
+                                    <h3>Suporte Técnico</h3>
+                                    <p>Problemas técnicos e soluções</p>
+                                </div>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="topic-stat">
+                                    <strong>234</strong>
+                                    Tópicos
+                                </div>
+                                <div class="topic-stat">
+                                    <strong>1.2K</strong>
+                                    Respostas
+                                </div>
+                                <div class="topic-stat">
+                                    <strong>45</strong>
+                                    Online
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-card" data-topic="duvidas-gerais">
+                            <div class="topic-header">
+                                <div class="topic-icon">❓</div>
+                                <div class="topic-info">
+                                    <h3>Dúvidas Gerais</h3>
+                                    <p>Perguntas e esclarecimentos</p>
+                                </div>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="topic-stat">
+                                    <strong>189</strong>
+                                    Tópicos
+                                </div>
+                                <div class="topic-stat">
+                                    <strong>856</strong>
+                                    Respostas
+                                </div>
+                                <div class="topic-stat">
+                                    <strong>32</strong>
+                                    Online
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-card" data-topic="tutoriais">
+                            <div class="topic-header">
+                                <div class="topic-icon">📖</div>
+                                <div class="topic-info">
+                                    <h3>Guias e Treinamento</h3>
+                                    <p>Aprenda passo a passo</p>
+                                </div>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="topic-stat">
+                                    <strong>67</strong>
+                                    Guias
+                                </div>
+                                <div class="topic-stat">
+                                    <strong>423</strong>
+                                    Visualizações
+                                </div>
+                                <div class="topic-stat">
+                                    <strong>18</strong>
+                                    Online
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-card" data-topic="feedback">
+                            <div class="topic-header">
+                                <div class="topic-icon">💡</div>
+                                <div class="topic-info">
+                                    <h3>Sugestões</h3>
+                                    <p>Ideias e melhorias</p>
+                                </div>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="topic-stat">
+                                    <strong>92</strong>
+                                    Ideias
+                                </div>
+                                <div class="topic-stat">
+                                    <strong>367</strong>
+                                    Votos
+                                </div>
+                                <div class="topic-stat">
+                                    <strong>12</strong>
+                                    Online
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>💬 Chat Recente</h2>
+                    <div class="discussion-list">
+                        <div class="discussion-item">
+                            <div class="discussion-header">
+                                <h3 class="discussion-title">Como resolver erro de conexão no sistema?</h3>
+                                <div class="discussion-meta">
+                                    <div>Por: @suporte_tech</div>
+                                    <div>2 horas atrás</div>
+                                </div>
+                            </div>
+                            <div class="discussion-preview">
+                                Estou enfrentando problemas de conexão intermitente no sistema. Já tentei reiniciar, mas
+                                o problema persiste...
+                            </div>
+                            <div class="discussion-footer">
+                                <div class="discussion-tags">
+                                    <span class="tag">Técnico</span>
+                                    <span class="tag">Urgente</span>
+                                </div>
+                                <div>👍 12 • 💬 8 respostas • 👁️ 156 visualizações</div>
+                            </div>
+                        </div>
+
+                        <div class="discussion-item">
+                            <div class="discussion-header">
+                                <h3 class="discussion-title">Treinamento: Como configurar notificações</h3>
+                                <div class="discussion-meta">
+                                    <div>Por: @admin_help</div>
+                                    <div>4 horas atrás</div>
+                                </div>
+                            </div>
+                            <div class="discussion-preview">
+                                Guia completo para configurar todas as notificações do sistema. Passo a passo com
+                                imagens...
+                            </div>
+                            <div class="discussion-footer">
+                                <div class="discussion-tags">
+                                    <span class="tag">Treinamento</span>
+                                    <span class="tag">Configuração</span>
+                                </div>
+                                <div>👍 28 • 💬 15 respostas • 👁️ 342 visualizações</div>
+                            </div>
+                        </div>
+
+                        <div class="discussion-item">
+                            <div class="discussion-header">
+                                <h3 class="discussion-title">Sugestão: Melhorias na interface</h3>
+                                <div class="discussion-meta">
+                                    <div>Por: @user_feedback</div>
+                                    <div>6 horas atrás</div>
+                                </div>
+                            </div>
+                            <div class="discussion-preview">
+                                Algumas ideias para tornar a interface mais intuitiva e fácil de usar. Gostaria de
+                                compartilhar...
+                            </div>
+                            <div class="discussion-footer">
+                                <div class="discussion-tags">
+                                    <span class="tag">Sugestão</span>
+                                    <span class="tag">UI/UX</span>
+                                </div>
+                                <div>👍 19 • 💬 23 respostas • 👁️ 287 visualizações</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Seção Dúvidas Gerais -->
+<div id="help" class="section-content">
+    <div class="help-header">
+        <h2>❓ Dúvidas Gerais - Assistente Administrativo</h2>
+        <p>Encontre respostas para as perguntas mais frequentes sobre atividades administrativas</p>
+    </div>
+
+    <!-- Barra de Pesquisa -->
+    <div class="search-container">
+        <div class="search-box-large">
+            <input type="text" id="faqSearch" class="search-input-large" placeholder="Buscar dúvidas...">
+            <button class="search-btn-large">🔍</button>
+        </div>
+        <div class="search-tips">
+            <span>💡 Dica: Pesquise por palavras-chave como "documentos", "RH", "contábil", etc.</span>
+        </div>
+    </div>
+
+    <!-- Filtro de Categorias -->
+    <div class="faq-categories">
+        <button class="faq-category-btn active" data-category="all">📚 Todas as Categorias</button>
+        <button class="faq-category-btn" data-category="documentos">📄 Documentação</button>
+        <button class="faq-category-btn" data-category="rh">👥 Recursos Humanos</button>
+        <button class="faq-category-btn" data-category="contabil">💰 Contábil/Fiscal</button>
+        <button class="faq-category-btn" data-category="tecnologia">💻 Tecnologia</button>
+        <button class="faq-category-btn" data-category="comportamento">💼 Comportamento</button>
+        <button class="faq-category-btn" data-category="legal">⚖️ Aspectos Legais</button>
+    </div>
+
+    <!-- Estatísticas Rápidas -->
+    <div class="faq-stats">
+        <div class="faq-stat-card">
+            <div class="stat-icon">❓</div>
+            <div class="stat-info">
+                <span class="stat-number">127</span>
+                <span class="stat-label">Dúvidas Respondidas</span>
+            </div>
+        </div>
+        <div class="faq-stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+                <span class="stat-number">89%</span>
+                <span class="stat-label">Taxa de Resolução</span>
+            </div>
+        </div>
+        <div class="faq-stat-card">
+            <div class="stat-icon">⏱️</div>
+            <div class="stat-info">
+                <span class="stat-number">2h</span>
+                <span class="stat-label">Tempo Médio Resposta</span>
+            </div>
+        </div>
+        <div class="faq-stat-card">
+            <div class="stat-icon">🌟</div>
+            <div class="stat-info">
+                <span class="stat-number">4.8</span>
+                <span class="stat-label">Avaliação dos Usuários</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de Dúvidas Frequentes -->
+    <div class="faq-grid">
+        
+        <!-- Categoria: Documentação -->
+        <div class="faq-category" data-category="documentos">
+            <h3 class="category-title">
+                📄 Documentação e Arquivo
+                <span class="faq-count">18 dúvidas</span>
+            </h3>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Quais documentos devem ser arquivados permanentemente?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Documentos de guarda permanente:</strong></p>
+                        <ul>
+                            <li>📑 Contratos sociais e alterações</li>
+                            <li>📊 Demonstrações financeiras anuais</li>
+                            <li>⚖️ Atas de assembleias e reuniões</li>
+                            <li>📝 Livros contábeis e fiscais</li>
+                            <li>🔐 Documentos de propriedade intelectual</li>
+                        </ul>
+                        <p><strong>💡 Dica:</strong> Mantenha uma lista de controle de temporalidade para cada tipo de documento.</p>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 47 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Como organizar a digitalização de documentos?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Passo a passo para digitalização eficiente:</strong></p>
+                        <ol>
+                            <li><strong>Preparação:</strong> Remova clipes e grampos, limpe os documentos</li>
+                            <li><strong>Configuração:</strong> Use 300 DPI para texto, 600 DPI para imagens</li>
+                            <li><strong>Formato:</strong> PDF/A para documentos, JPEG para imagens</li>
+                            <li><strong>Nomeação:</strong> Use padrão AAAAMMDD_Tipo_NomeArquivo.pdf</li>
+                            <li><strong>Backup:</strong> Mantenha cópias em nuvem e HD externo</li>
+                        </ol>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 32 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Qual o prazo de guarda de documentos trabalhistas?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Prazos de guarda conforme a legislação:</strong></p>
+                        <ul>
+                            <li>📋 <strong>5 anos:</strong> Recibos de pagamento, folha de ponto</li>
+                            <li>📑 <strong>10 anos:</strong> Livros de registro de empregados</li>
+                            <li>⚖️ <strong>20 anos:</strong> Documentos de acidente de trabalho</li>
+                            <li>💰 <strong>30 anos:</strong> Documentos do FGTS</li>
+                            <li>📊 <strong>Indeterminado:</strong> Carteira de trabalho (após demissão)</li>
+                        </ul>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 56 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria: Recursos Humanos -->
+        <div class="faq-category" data-category="rh">
+            <h3 class="category-title">
+                👥 Recursos Humanos
+                <span class="faq-count">22 dúvidas</span>
+            </h3>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Como calcular horas extras corretamente?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Fórmula para cálculo de horas extras:</strong></p>
+                        <div class="calculation-example">
+                            <p><strong>Valor da hora normal:</strong> Salário ÷ 220</p>
+                            <p><strong>Hora extra (50%):</strong> Valor hora normal × 1.5</p>
+                            <p><strong>Hora extra (100%):</strong> Valor hora normal × 2.0</p>
+                        </div>
+                        <p><strong>💡 Exemplo prático:</strong></p>
+                        <ul>
+                            <li>Salário: R$ 2.200,00</li>
+                            <li>Valor hora: R$ 10,00 (2200 ÷ 220)</li>
+                            <li>Hora extra 50%: R$ 15,00</li>
+                            <li>10 horas extras: R$ 150,00</li>
+                        </ul>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 78 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Quais documentos são necessários para admissão?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Documentação obrigatória para admissão:</strong></p>
+                        <ul>
+                            <li>📝 <strong>Documentos pessoais:</strong> RG, CPF, CTPS, PIS</li>
+                            <li>🎓 <strong>Comprovantes:</strong> Título eleitoral, certificado militar</li>
+                            <li>🏠 <strong>Residência:</strong> Comprovante de endereço</li>
+                            <li>💼 <strong>Profissionais:</strong> Diploma (se aplicável), certificados</li>
+                            <li>🏥 <strong>Saúde:</strong> Atestado de saúde ocupacional</li>
+                        </ul>
+                        <p><strong>⚠️ Atenção:</strong> Mantenha cópias digitalizadas de todos os documentos.</p>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 63 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Como lidar com atestados médicos?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Procedimento para atestados médicos:</strong></p>
+                        <ol>
+                            <li><strong>Verificação:</strong> Confira data, CRM do médico, carimbo</li>
+                            <li><strong>Registro:</strong> Anote no sistema de ponto/controle</li>
+                            <li><strong>Classificação:</strong> Identifique se é doença ou acidente</li>
+                            <li><strong>Prazo:</strong> Funcionário tem 48h para entregar atestado</li>
+                            <li><strong>Arquivamento:</strong> Guarde por 10 anos</li>
+                        </ol>
+                        <p><strong>💡 Dica:</strong> Use um checklist para não esquecer nenhum detalhe importante.</p>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 45 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria: Contábil/Fiscal -->
+        <div class="faq-category" data-category="contabil">
+            <h3 class="category-title">
+                💰 Contábil/Fiscal
+                <span class="faq-count">15 dúvidas</span>
+            </h3>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Quais os prazos do eSocial?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Principais prazos do eSocial:</strong></p>
+                        <ul>
+                            <li>📅 <strong>Até dia 7:</strong> Eventos S-2200 (admissão) e S-2300 (afastamento)</li>
+                            <li>📅 <strong>Até dia 15:</strong> Folha de pagamento (S-1200, S-2299, S-2399)</li>
+                            <li>📅 <strong>Até dia 25:</strong> Eventos de segurança (S-2210)</li>
+                            <li>📅 <strong>Até último dia útil:</strong> FGTS e GPS</li>
+                        </ul>
+                        <p><strong>⚠️ Importante:</strong> Fique atento aos feriados que podem alterar os prazos.</p>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 89 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Como emitir uma nota fiscal de serviço?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Passo a passo para emissão de NFS-e:</strong></p>
+                        <ol>
+                            <li><strong>Cadastro:</strong> Verifique se o cliente está cadastrado no sistema</li>
+                            <li><strong>Serviço:</strong> Selecione o código de serviço adequado (LC 116)</li>
+                            <li><strong>Valores:</strong> Insira valor do serviço, descontos e base de cálculo</li>
+                            <li><strong>Tributação:</strong> Sistema calcula automaticamente os impostos</li>
+                            <li><strong>Emissão:</strong> Gere a nota e envie por e-mail ao cliente</li>
+                        </ol>
+                        <p><strong>💡 Dica:</strong> Mantenha uma lista de códigos de serviços frequentes para agilizar.</p>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 52 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria: Tecnologia -->
+        <div class="faq-category" data-category="tecnologia">
+            <h3 class="category-title">
+                💻 Tecnologia
+                <span class="faq-count">12 dúvidas</span>
+            </h3>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Quais as funções do Excel mais usadas no administrativo?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Funções essenciais do Excel para administrativo:</strong></p>
+                        <div class="excel-functions">
+                            <div class="function-group">
+                                <h5>🧮 Cálculos Básicos:</h5>
+                                <ul>
+                                    <li><code>=SOMA()</code> - Soma de valores</li>
+                                    <li><code>=MÉDIA()</code> - Cálculo de média</li>
+                                    <li><code>=CONT.SE()</code> - Contagem com condição</li>
+                                </ul>
+                            </div>
+                            <div class="function-group">
+                                <h5>🔍 Pesquisa:</h5>
+                                <ul>
+                                    <li><code>=PROCV()</code> - Busca vertical</li>
+                                    <li><code>=PROCH()</code> - Busca horizontal</li>
+                                    <li><code>=ÍNDICE()</code> + <code>=CORRESP()</code> - Busca avançada</li>
+                                </ul>
+                            </div>
+                            <div class="function-group">
+                                <h5>📊 Formatação:</h5>
+                                <ul>
+                                    <li><code>=SE()</code> - Condicional</li>
+                                    <li><code>=TEXTO()</code> - Formatação de texto</li>
+                                    <li><code>=DATA()</code> - Trabalhando com datas</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 94 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria: Comportamento -->
+        <div class="faq-category" data-category="comportamento">
+            <h3 class="category-title">
+                💼 Comportamento Profissional
+                <span class="faq-count">10 dúvidas</span>
+            </h3>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="question-icon">❓</span>
+                        <h4>Como lidar com prazos curtos e múltiplas tarefas?</h4>
+                        <button class="toggle-answer">↓</button>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Estratégias para gestão do tempo:</strong></p>
+                        <ul>
+                            <li>📋 <strong>Priorização:</strong> Use a matriz de Eisenhower (urgente x importante)</li>
+                            <li>⏰ <strong>Técnica Pomodoro:</strong> 25min focado + 5min pausa</li>
+                            <li>📝 <strong>Lista de tarefas:</strong> Divida grandes tarefas em pequenas etapas</li>
+                            <li>🚫 <strong>Diga não:</strong> Aprenda a recusar tarefas quando sobrecarregado</li>
+                            <li>🔄 <strong>Comunique:</strong> Avise seu gestor sobre prazos irreais</li>
+                        </ul>
+                        <p><strong>💡 Dica:</strong> Use ferramentas como Trello ou Asana para organizar suas atividades.</p>
+                        <div class="answer-meta">
+                            <span class="helpful-count">👍 67 pessoas acharam útil</span>
+                            <button class="helpful-btn">Esta resposta foi útil?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulário para Nova Dúvida -->
+    <div class="new-question-section">
+        <div class="new-question-card">
+            <h3>❓ Não encontrou sua dúvida?</h3>
+            <p>Envie sua pergunta e nossa comunidade de especialistas responderá em até 2 horas</p>
+            <form class="question-form" id="newQuestionForm">
+                <div class="form-group">
+                    <label for="questionCategory">Categoria da Dúvida:</label>
+                    <select id="questionCategory" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="documentos">📄 Documentação</option>
+                        <option value="rh">👥 Recursos Humanos</option>
+                        <option value="contabil">💰 Contábil/Fiscal</option>
+                        <option value="tecnologia">💻 Tecnologia</option>
+                        <option value="comportamento">💼 Comportamento</option>
+                        <option value="legal">⚖️ Aspectos Legais</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionTitle">Título da Dúvida:</label>
+                    <input type="text" id="questionTitle" placeholder="Ex: Como calcular férias proporcionais?" required>
+                </div>
+                <div class="form-group">
+                    <label for="questionDetail">Detalhes da Dúvida:</label>
+                    <textarea id="questionDetail" placeholder="Descreva sua dúvida com detalhes..." rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-question-btn">📤 Enviar Dúvida</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+                <!-- Seção Chat -->
+                <div id="discussions" class="section-content">
+                    <h2>💬 Chat da Comunidade</h2>
+
+                    <!-- Chat Container -->
+                    <div class="chat-container">
+                        <!-- Chat Messages Area -->
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message other-message">
+                                <div class="message-avatar">AS</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-author">Admin Suporte</span>
+                                        <span class="message-time">14:30</span>
+                                    </div>
+                                    <div class="message-text">Bem-vindos ao chat da comunidade! Estou aqui para ajudar
+                                        com qualquer dúvida 😊</div>
+                                </div>
+                            </div>
+
+                            <div class="message other-message">
+                                <div class="message-avatar">TH</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-author">Tech Helper</span>
+                                        <span class="message-time">14:32</span>
+                                    </div>
+                                    <div class="message-text">Alguém sabe calcular horas extras noturnas? Tenho um funcionário que trabalhou das 22h às 02h. 🤔
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message other-message">
+                                <div class="message-avatar">SH</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-author">SuperHelper</span>
+                                        <span class="message-time">14:35</span>
+                                    </div>
+                                    <div class="message-text">@Tech Helper, hora noturna é 52:30min! Das 22h às 02h são 4 horas normais = 4:38h noturnas. Calcula o adicional noturno + horas extras! ⚡ </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input Area -->
+                        <div class="chat-input-container">
+                            <div class="chat-input-wrapper">
+                                <input type="text" id="chatInput" class="chat-input"
+                                    placeholder="Digite sua mensagem..." maxlength="500">
+                                <button id="sendButton" class="chat-send-btn">
+                                    <span class="send-icon">📤</span>
+                                </button>
+                            </div>
+                            <div class="chat-info">
+                                <span class="typing-indicator" id="typingIndicator" style="display: none;">
+                                    <span class="typing-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                    Alguém está digitando...
+                                </span>
+                                <span class="online-count">156 pessoas online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção Central de Ajuda -->
+<div id="help" class="section-content">
+    <div class="help-header">
+        <h2>🎥 Central de Ajuda - Vídeo Aulas</h2>
+        <p>Encontre tutoriais em vídeo organizados por categorias para seu desenvolvimento profissional</p>
+    </div>
+
+    <!-- Filtro de Categorias -->
+    <div class="categories-filter">
+        <button class="category-btn active" data-category="all">📚 Todos os Vídeos</button>
+        <button class="category-btn" data-category="totvs">💼 TOTVS RM</button>
+        <button class="category-btn" data-category="office">📱 Pacote Office</button>
+        <button class="category-btn" data-category="saude">🧠 Saúde Mental</button>
+        <button class="category-btn" data-category="admin">📊 Administrativo</button>
+    </div>
+
+    <!-- Estatísticas Rápidas -->
+    <div class="video-stats">
+        <div class="stat-item">
+            <span class="stat-number">47</span>
+            <span class="stat-label">Vídeos Disponíveis</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">18h</span>
+            <span class="stat-label">Conteúdo Total</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">94%</span>
+            <span class="stat-label">Avaliação Positiva</span>
+        </div>
+    </div>
+
+    <!-- Grid de Vídeos -->
+    <div class="videos-grid" id="videosGrid">
+        
+        <!-- Categoria: TOTVS RM -->
+        <div class="video-category" data-category="totvs">
+            <h3 class="category-title">
+                💼 TOTVS RM - Sistema de Gestão
+                <span class="video-count">12 vídeos</span>
+            </h3>
+            <div class="videos-row">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Introdução ao TOTVS RM">
+                        <div class="video-duration">15:30</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Introdução ao TOTVS RM - Primeiros Passos</h4>
+                        <p class="video-description">Aprenda a navegar pelo sistema e entender sua estrutura básica</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 2.4K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Sistema</span>
+                            <span class="tag">Navegação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/abc123/mqdefault.jpg" alt="Lançamento Contábil">
+                        <div class="video-duration">22:15</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Lançamento Contábil no TOTVS RM</h4>
+                        <p class="video-description">Passo a passo completo para lançamentos contábeis</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟡 Intermediário</span>
+                            <span class="video-views">▶ 1.8K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Contábil</span>
+                            <span class="tag">Financeiro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/def456/mqdefault.jpg" alt="Relatórios Gerenciais">
+                        <div class="video-duration">18:45</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Relatórios Gerenciais - TOTVS RM</h4>
+                        <p class="video-description">Como extrair e analisar relatórios para tomada de decisão</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟡 Intermediário</span>
+                            <span class="video-views">▶ 1.2K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Relatórios</span>
+                            <span class="tag">Gestão</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria: Pacote Office -->
+        <div class="video-category" data-category="office">
+            <h3 class="category-title">
+                📱 Pacote Office Essencial
+                <span class="video-count">18 vídeos</span>
+            </h3>
+            <div class="videos-row">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/ghi789/mqdefault.jpg" alt="Excel para Administrativo">
+                        <div class="video-duration">25:10</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Excel para Assistente Administrativo</h4>
+                        <p class="video-description">Funções essenciais e formatação profissional</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 3.1K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Excel</span>
+                            <span class="tag">Planilhas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/jkl012/mqdefault.jpg" alt="Word Profissional">
+                        <div class="video-duration">20:35</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Word - Documentos Profissionais</h4>
+                        <p class="video-description">Formatação de relatórios, ofícios e documentos corporativos</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 2.7K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Word</span>
+                            <span class="tag">Documentos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/mno345/mqdefault.jpg" alt="PowerPoint Apresentações">
+                        <div class="video-duration">17:20</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>PowerPoint - Apresentações Impactantes</h4>
+                        <p class="video-description">Crie slides profissionais para reuniões e apresentações</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 1.9K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">PowerPoint</span>
+                            <span class="tag">Apresentações</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria: Saúde Mental -->
+        <div class="video-category" data-category="saude">
+            <h3 class="category-title">
+                🧠 Saúde Mental no Trabalho
+                <span class="video-count">9 vídeos</span>
+            </h3>
+            <div class="videos-row">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/pqr678/mqdefault.jpg" alt="Gestão do Estresse">
+                        <div class="video-duration">14:25</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Gestão do Estresse no Ambiente Administrativo</h4>
+                        <p class="video-description">Técnicas práticas para lidar com pressão no trabalho</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 4.2K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Estresse</span>
+                            <span class="tag">Bem-estar</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/stu901/mqdefault.jpg" alt="Produtividade Saudável">
+                        <div class="video-duration">19:40</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Produtividade sem Burnout</h4>
+                        <p class="video-description">Como ser produtivo mantendo a saúde mental</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 3.5K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Produtividade</span>
+                            <span class="tag">Burnout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/vwx234/mqdefault.jpg" alt="Técnicas de Relaxamento">
+                        <div class="video-duration">12:15</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Técnicas de Relaxamento no Trabalho</h4>
+                        <p class="video-description">Exercícios rápidos para fazer no escritório</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 2.8K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Relaxamento</span>
+                            <span class="tag">Exercícios</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria: Administrativo -->
+        <div class="video-category" data-category="admin">
+            <h3 class="category-title">
+                📊 Técnicas Administrativas
+                <span class="video-count">8 vídeos</span>
+            </h3>
+            <div class="videos-row">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/yza567/mqdefault.jpg" alt="Organização de Documentos">
+                        <div class="video-duration">16:50</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Organização Eficiente de Documentos</h4>
+                        <p class="video-description">Sistemas de arquivamento físico e digital</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 2.1K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Organização</span>
+                            <span class="tag">Documentos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/bcd890/mqdefault.jpg" alt="Atendimento Telefônico">
+                        <div class="video-duration">13:30</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Atendimento Telefônico Profissional</h4>
+                        <p class="video-description">Técnicas para um atendimento eficiente e cortês</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟢 Iniciante</span>
+                            <span class="video-views">▶ 1.7K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Atendimento</span>
+                            <span class="tag">Telefone</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/efg123/mqdefault.jpg" alt="Gestão do Tempo">
+                        <div class="video-duration">21:05</div>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Gestão do Tempo para Administrativos</h4>
+                        <p class="video-description">Métodos para otimizar seu tempo no trabalho</p>
+                        <div class="video-meta">
+                            <span class="video-level">🟡 Intermediário</span>
+                            <span class="video-views">▶ 2.3K visualizações</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">Tempo</span>
+                            <span class="tag">Produtividade</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player de Vídeo Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Título do Vídeo</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="video-player">
+                <iframe id="videoIframe" width="100%" height="400" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-details">
+                <div class="detail-item">
+                    <strong>Duração:</strong> <span id="modalDuration">--:--</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Visualizações:</strong> <span id="modalViews">---</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Nível:</strong> <span id="modalLevel">---</span>
+                </div>
+            </div>
+            <div class="video-description-modal">
+                <p id="modalDescription">Descrição do vídeo...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <!-- Seção Treinamento -->
+                <div id="tutorials" class="section-content">
+                    <div class="ebook-header">
+                        <h1>📚 E-book: Guia Completo para Assistente Administrativo</h1>
+                        <p class="ebook-subtitle">Atividades Administrativas - Passo a Passo</p>
+                        <div class="ebook-info">
+                            <span class="ebook-badge">🎓 Iniciante</span>
+                            <span class="ebook-badge">⏱️ 45 min</span>
+                            <span class="ebook-badge">📖 5 Módulos</span>
+                        </div>
+                    </div>
+
+                    <div class="ebook-navigation">
+                        <button class="module-btn active" data-module="1">
+                            📋 Módulo 1: Organização de Documentos
+                        </button>
+                        <button class="module-btn" data-module="2">
+                            📞 Módulo 2: Atendimento Telefônico
+                        </button>
+                        <button class="module-btn" data-module="3">
+                            📧 Módulo 3: E-mails Profissionais
+                        </button>
+                        <button class="module-btn" data-module="4">
+                            📄 Módulo 4: Digitalização de Documentos
+                        </button>
+                        <button class="module-btn" data-module="5">
+                            👥 Módulo 5: Gestão de Recursos Humanos
+                        </button>
+                        <button class="module-btn" data-module="6">
+                            💼 Módulo 6: TOTVS RM
+                        </button>
+                        <button class="module-btn" data-module="7">
+                            📱 Módulo 7: Pacote Office
+                        </button>
+
+                        <button class="module-btn" data-module="8">
+                            🧠 Módulo 8: Saúde Mental
+                        </button>
+
+
+
+                    </div>
+
+                    <!-- Módulo 1: Organização de Documentos -->
+                    <div id="module1" class="module-content active">
+                        <!-- Conteúdo do Módulo 1 (mantido igual ao anterior) -->
+                        <div class="module-header">
+                            <h2>📋 Módulo 1: Organização de Documentos</h2>
+                            <div class="module-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="lesson-container">
+                            <div class="lesson-step" data-step="1">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h3>Identificação dos Tipos de Documentos</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Aprender a identificar e classificar diferentes tipos
+                                        de documentos administrativos.</p>
+
+                                    <div class="info-box">
+                                        <h4>🗂️ Principais Tipos de Documentos:</h4>
+                                        <ul>
+                                            <li><strong>Contratos:</strong> Acordos formais entre partes</li>
+                                            <li><strong>Faturas:</strong> Documentos de cobrança</li>
+                                            <li><strong>Relatórios:</strong> Documentos informativos</li>
+                                            <li><strong>Correspondências:</strong> E-mails, cartas, ofícios</li>
+                                            <li><strong>Comprovantes:</strong> Recibos, notas fiscais</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="practical-example">
+                                        <h4>💡 Exemplo Prático:</h4>
+                                        <p>Você recebeu uma pilha de documentos. Vamos classificá-los:</p>
+                                        <div class="document-examples">
+                                            <div class="doc-item">
+                                                <span class="doc-icon">📄</span>
+                                                <div class="doc-info">
+                                                    <strong>Nota Fiscal nº 12345</strong>
+                                                    <p>Tipo: Comprovante Fiscal</p>
+                                                </div>
+                                            </div>
+                                            <div class="doc-item">
+                                                <span class="doc-icon">📋</span>
+                                                <div class="doc-info">
+                                                    <strong>Contrato de Prestação de Serviços</strong>
+                                                    <p>Tipo: Contrato</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="1" data-module="1">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="2" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h3>Sistema de Classificação</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Criar um sistema eficiente de classificação por
+                                        categorias.</p>
+
+                                    <div class="classification-system">
+                                        <h4>🏷️ Sistema de Cores e Códigos:</h4>
+                                        <div class="color-system">
+                                            <div class="color-item">
+                                                <div class="color-box" style="background: #ff6b35;"></div>
+                                                <div>
+                                                    <strong>Vermelho - Urgente</strong>
+                                                    <p>Documentos que precisam de ação imediata</p>
+                                                </div>
+                                            </div>
+                                            <div class="color-item">
+                                                <div class="color-box" style="background: #f7931e;"></div>
+                                                <div>
+                                                    <strong>Laranja - Financeiro</strong>
+                                                    <p>Faturas, recibos, comprovantes</p>
+                                                </div>
+                                            </div>
+                                            <div class="color-item">
+                                                <div class="color-box" style="background: #27ae60;"></div>
+                                                <div>
+                                                    <strong>Verde - Contratos</strong>
+                                                    <p>Acordos e documentos legais</p>
+                                                </div>
+                                            </div>
+                                            <div class="color-item">
+                                                <div class="color-box" style="background: #3498db;"></div>
+                                                <div>
+                                                    <strong>Azul - Correspondências</strong>
+                                                    <p>E-mails, cartas, comunicados</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tip-box">
+                                        <h4>💡 Dica Profissional:</h4>
+                                        <p>Use etiquetas coloridas ou pastas com cores para facilitar a identificação
+                                            visual rápida!</p>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="2" data-module="1">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="3" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h3>Organização Física e Digital</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Implementar um sistema de arquivamento eficiente.</p>
+
+                                    <div class="organization-methods">
+                                        <div class="method-card">
+                                            <h4>📁 Arquivamento Físico</h4>
+                                            <ol>
+                                                <li>Separe por categoria usando o sistema de cores</li>
+                                                <li>Organize em ordem cronológica (mais recente na frente)</li>
+                                                <li>Use divisórias com etiquetas claras</li>
+                                                <li>Mantenha uma lista de controle</li>
+                                            </ol>
+                                        </div>
+
+                                        <div class="method-card">
+                                            <h4>💻 Arquivamento Digital</h4>
+                                            <ol>
+                                                <li>Crie pastas com nomes padronizados</li>
+                                                <li>Use formato: "AAAA-MM-DD_TipoDoc_Descrição"</li>
+                                                <li>Faça backup regular dos arquivos</li>
+                                                <li>Mantenha uma planilha de controle</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="checklist-box">
+                                        <h4>✅ Checklist de Organização:</h4>
+                                        <div class="checklist">
+                                            <label><input type="checkbox"> Documentos classificados por tipo</label>
+                                            <label><input type="checkbox"> Sistema de cores implementado</label>
+                                            <label><input type="checkbox"> Arquivos nomeados corretamente</label>
+                                            <label><input type="checkbox"> Lista de controle atualizada</label>
+                                            <label><input type="checkbox"> Backup realizado</label>
+                                        </div>
+                                    </div>
+
+                                    <button class="complete-module-btn" data-module="1">✅ Concluir Módulo 1</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 2: Atendimento Telefônico -->
+                    <div id="module2" class="module-content">
+                        <!-- Conteúdo do Módulo 2 (mantido igual ao anterior) -->
+                        <div class="module-header">
+                            <h2>📞 Módulo 2: Atendimento Telefônico Profissional</h2>
+                            <div class="module-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="lesson-container">
+                            <div class="lesson-step" data-step="1">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h3>Preparação para o Atendimento</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Preparar-se adequadamente antes de atender chamadas
+                                        telefônicas.</p>
+
+                                    <div class="preparation-list">
+                                        <h4>🎯 Antes de Atender:</h4>
+                                        <div class="prep-items">
+                                            <div class="prep-item">
+                                                <span class="prep-icon">📝</span>
+                                                <div>
+                                                    <strong>Tenha sempre à mão:</strong>
+                                                    <p>Papel, caneta, agenda, lista de ramais</p>
+                                                </div>
+                                            </div>
+                                            <div class="prep-item">
+                                                <span class="prep-icon">💻</span>
+                                                <div>
+                                                    <strong>Sistema atualizado:</strong>
+                                                    <p>Acesso ao sistema da empresa funcionando</p>
+                                                </div>
+                                            </div>
+                                            <div class="prep-item">
+                                                <span class="prep-icon">🎧</span>
+                                                <div>
+                                                    <strong>Ambiente adequado:</strong>
+                                                    <p>Local silencioso, sem ruídos de fundo</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="voice-tips">
+                                        <h4>🗣️ Preparação da Voz:</h4>
+                                        <ul>
+                                            <li>Fale de forma clara e pausada</li>
+                                            <li>Mantenha um tom amigável e profissional</li>
+                                            <li>Sorria ao falar (isso transparece na voz!)</li>
+                                            <li>Mantenha boa postura</li>
+                                        </ul>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="1" data-module="2">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="2" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h3>Script de Atendimento</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Dominar as frases e abordagens corretas para cada
+                                        situação.</p>
+
+                                    <div class="script-sections">
+                                        <div class="script-card">
+                                            <h4>📞 Atendimento Inicial</h4>
+                                            <div class="script-example">
+                                                <p><strong>"Bom dia/Boa tarde, [Nome da Empresa], meu nome é [Seu Nome].
+                                                        Como posso ajudá-lo?"</strong></p>
+                                            </div>
+                                            <div class="script-tips">
+                                                <p>✅ Sempre se identifique<br>
+                                                    ✅ Seja cordial e direto<br>
+                                                    ✅ Demonstre disponibilidade</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="script-card">
+                                            <h4>🔄 Transferindo Chamadas</h4>
+                                            <div class="script-example">
+                                                <p><strong>"Vou transferir sua ligação para o setor responsável. Por
+                                                        favor, aguarde um momento."</strong></p>
+                                            </div>
+                                            <div class="script-tips">
+                                                <p>✅ Explique o motivo da transferência<br>
+                                                    ✅ Peça para aguardar<br>
+                                                    ✅ Confirme se a pessoa pode esperar</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="script-card">
+                                            <h4>📝 Anotando Recados</h4>
+                                            <div class="script-example">
+                                                <p><strong>"Posso anotar um recado? Preciso do seu nome completo,
+                                                        empresa e telefone para contato."</strong></p>
+                                            </div>
+                                            <div class="script-tips">
+                                                <p>✅ Confirme os dados<br>
+                                                    ✅ Repita as informações<br>
+                                                    ✅ Garanta que entregará o recado</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="2" data-module="2">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="3" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h3>Situações Desafiadoras</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Saber como lidar com situações difíceis no
+                                        atendimento.</p>
+
+                                    <div class="challenge-scenarios">
+                                        <div class="scenario-card">
+                                            <h4>😤 Cliente Irritado</h4>
+                                            <div class="scenario-content">
+                                                <p><strong>Como agir:</strong></p>
+                                                <ol>
+                                                    <li>Mantenha a calma e seja empático</li>
+                                                    <li>Ouça sem interromper</li>
+                                                    <li>Peça desculpas pelo inconveniente</li>
+                                                    <li>Ofereça soluções ou transfira para supervisor</li>
+                                                </ol>
+                                                <div class="example-phrase">
+                                                    <strong>Frase exemplo:</strong> "Entendo sua frustração e peço
+                                                    desculpas pelo inconveniente. Vou fazer o possível para resolver
+                                                    isso."
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="scenario-card">
+                                            <h4>❓ Não Sei a Resposta</h4>
+                                            <div class="scenario-content">
+                                                <p><strong>Como agir:</strong></p>
+                                                <ol>
+                                                    <li>Seja honesto sobre não saber</li>
+                                                    <li>Ofereça-se para descobrir</li>
+                                                    <li>Dê um prazo para retorno</li>
+                                                    <li>Anote os dados para contato</li>
+                                                </ol>
+                                                <div class="example-phrase">
+                                                    <strong>Frase exemplo:</strong> "Não tenho essa informação no
+                                                    momento, mas vou verificar e retorno em até 2 horas. Posso anotar
+                                                    seu telefone?"
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="scenario-card">
+                                            <h4>📞 Linha com Ruído</h4>
+                                            <div class="scenario-content">
+                                                <p><strong>Como agir:</strong></p>
+                                                <ol>
+                                                    <li>Informe sobre o problema na linha</li>
+                                                    <li>Peça para repetir informações importantes</li>
+                                                    <li>Ofereça para retornar a ligação</li>
+                                                    <li>Confirme dados por e-mail se necessário</li>
+                                                </ol>
+                                                <div class="example-phrase">
+                                                    <strong>Frase exemplo:</strong> "Estou com dificuldade para ouvir
+                                                    devido ao ruído na linha. Posso retornar sua ligação?"
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="complete-module-btn" data-module="2">✅ Concluir Módulo 2</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 3: E-mails Profissionais -->
+                    <div id="module3" class="module-content">
+                        <!-- Conteúdo do Módulo 3 (mantido igual ao anterior) -->
+                        <div class="module-header">
+                            <h2>📧 Módulo 3: E-mails Profissionais</h2>
+                            <div class="module-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="lesson-container">
+                            <div class="lesson-step" data-step="1">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h3>Estrutura do E-mail Profissional</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Aprender a estrutura correta de um e-mail
+                                        profissional.</p>
+
+                                    <div class="email-structure">
+                                        <div class="email-part">
+                                            <h4>📝 Assunto</h4>
+                                            <p>Deve ser claro, específico e informativo</p>
+                                            <div class="examples">
+                                                <p><strong>✅ Bom:</strong> "Reunião de projeto - 15/03 às 14h"</p>
+                                                <p><strong>❌ Ruim:</strong> "Reunião"</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="email-part">
+                                            <h4>👋 Saudação</h4>
+                                            <p>Formal mas cordial</p>
+                                            <div class="examples">
+                                                <p><strong>Formal:</strong> "Prezado(a) Sr.(a) Silva"</p>
+                                                <p><strong>Semiformal:</strong> "Olá, João"</p>
+                                                <p><strong>Equipe:</strong> "Bom dia, pessoal"</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="email-part">
+                                            <h4>📄 Corpo do E-mail</h4>
+                                            <div class="email-body-structure">
+                                                <div class="body-section">
+                                                    <strong>1º Parágrafo:</strong> Contexto/Motivo
+                                                </div>
+                                                <div class="body-section">
+                                                    <strong>2º Parágrafo:</strong> Informações principais
+                                                </div>
+                                                <div class="body-section">
+                                                    <strong>3º Parágrafo:</strong> Ação esperada/Próximos passos
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="email-part">
+                                            <h4>👋 Despedida</h4>
+                                            <p>Profissional e cordial</p>
+                                            <div class="examples">
+                                                <p>"Atenciosamente,"</p>
+                                                <p>"Cordialmente,"</p>
+                                                <p>"Abraços," (mais informal)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="1" data-module="3">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="2" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h3>Modelos de E-mail</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Conhecer modelos práticos para diferentes situações.
+                                    </p>
+
+                                    <div class="email-templates">
+                                        <div class="template-card">
+                                            <h4>📅 Agendamento de Reunião</h4>
+                                            <div class="template-content">
+                                                <div class="template-field">
+                                                    <strong>Assunto:</strong> Agendamento de reunião - Projeto X
+                                                </div>
+                                                <div class="template-body">
+                                                    <p>Prezado(a) [Nome],</p>
+                                                    <p>Espero que esteja bem. Gostaria de agendar uma reunião para
+                                                        discutirmos o andamento do Projeto X.</p>
+                                                    <p><strong>Proposta de data/horário:</strong><br>
+                                                        Data: [dd/mm/aaaa]<br>
+                                                        Horário: [hh:mm]<br>
+                                                        Local: [Sala/Online]</p>
+                                                    <p>Por favor, confirme sua disponibilidade.</p>
+                                                    <p>Atenciosamente,<br>[Seu nome]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="template-card">
+                                            <h4>📋 Envio de Relatório</h4>
+                                            <div class="template-content">
+                                                <div class="template-field">
+                                                    <strong>Assunto:</strong> Relatório mensal - [Mês/Ano]
+                                                </div>
+                                                <div class="template-body">
+                                                    <p>Prezado(a) [Nome],</p>
+                                                    <p>Segue em anexo o relatório mensal referente ao período de
+                                                        [período].</p>
+                                                    <p><strong>Principais destaques:</strong><br>
+                                                        • [Ponto 1]<br>
+                                                        • [Ponto 2]<br>
+                                                        • [Ponto 3]</p>
+                                                    <p>Fico à disposição para esclarecimentos.</p>
+                                                    <p>Cordialmente,<br>[Seu nome]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="template-card">
+                                            <h4>❓ Solicitação de Informações</h4>
+                                            <div class="template-content">
+                                                <div class="template-field">
+                                                    <strong>Assunto:</strong> Solicitação de informações - [Assunto
+                                                    específico]
+                                                </div>
+                                                <div class="template-body">
+                                                    <p>Olá [Nome],</p>
+                                                    <p>Preciso de algumas informações para [finalidade].</p>
+                                                    <p><strong>Informações necessárias:</strong><br>
+                                                        1. [Informação 1]<br>
+                                                        2. [Informação 2]<br>
+                                                        3. [Informação 3]</p>
+                                                    <p>Prazo: [data limite]</p>
+                                                    <p>Agradeço a atenção!</p>
+                                                    <p>Atenciosamente,<br>[Seu nome]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="2" data-module="3">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="3" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h3>Boas Práticas e Etiqueta</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Dominar as regras de etiqueta para comunicação
+                                        profissional por e-mail.</p>
+
+                                    <div class="best-practices">
+                                        <div class="practice-section">
+                                            <h4>✅ O que FAZER</h4>
+                                            <ul class="do-list">
+                                                <li>Responder em até 24 horas</li>
+                                                <li>Usar "Responder a todos" apenas quando necessário</li>
+                                                <li>Revisar antes de enviar</li>
+                                                <li>Usar formatação simples e clara</li>
+                                                <li>Incluir assinatura profissional</li>
+                                                <li>Confirmar recebimento de e-mails importantes</li>
+                                                <li>Usar "Com cópia" e "Com cópia oculta" adequadamente</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="practice-section">
+                                            <h4>❌ O que NÃO FAZER</h4>
+                                            <ul class="dont-list">
+                                                <li>Usar CAPS LOCK (parece que está gritando)</li>
+                                                <li>Enviar e-mails com erros de português</li>
+                                                <li>Usar linguagem muito informal</li>
+                                                <li>Enviar anexos muito pesados</li>
+                                                <li>Esquecer de incluir anexos mencionados</li>
+                                                <li>Usar emoticons em excesso</li>
+                                                <li>Marcar como "Urgente" sem necessidade</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="signature-example">
+                                        <h4>✍️ Modelo de Assinatura Profissional</h4>
+                                        <div class="signature-box">
+                                            <p><strong>[Seu Nome Completo]</strong><br>
+                                                [Cargo] | [Nome da Empresa]<br>
+                                                📞 [Telefone] | 📧 [E-mail]<br>
+                                                🌐 [Site da empresa]</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="final-tips">
+                                        <h4>🎯 Dicas Finais</h4>
+                                        <div class="tips-grid">
+                                            <div class="tip-item">
+                                                <span class="tip-icon">⏰</span>
+                                                <p><strong>Timing:</strong> Evite enviar e-mails fora do horário
+                                                    comercial, exceto urgências</p>
+                                            </div>
+                                            <div class="tip-item">
+                                                <span class="tip-icon">🎯</span>
+                                                <p><strong>Objetividade:</strong> Seja direto e claro. Tempo é valioso!
+                                                </p>
+                                            </div>
+                                            <div class="tip-item">
+                                                <span class="tip-icon">🔒</span>
+                                                <p><strong>Confidencialidade:</strong> Cuidado com informações sensíveis
+                                                </p>
+                                            </div>
+                                            <div class="tip-item">
+                                                <span class="tip-icon">📱</span>
+                                                <p><strong>Mobile:</strong> Teste como seu e-mail fica no celular</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="complete-module-btn" data-module="3">✅ Concluir Módulo 3</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 4: Digitalização de Documentos -->
+                    <div id="module4" class="module-content">
+                        <div class="module-header">
+                            <h2>📄 Módulo 4: Digitalização de Documentos</h2>
+                            <div class="module-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="lesson-container">
+                            <div class="lesson-step" data-step="1">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h3>Preparação para Digitalização</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Aprender os procedimentos necessários antes de
+                                        digitalizar documentos.</p>
+
+                                    <div class="info-box">
+                                        <h4>🛠️ Equipamentos Necessários:</h4>
+                                        <ul>
+                                            <li><strong>Scanner ou Multifuncional:</strong> Para capturar as imagens
+                                            </li>
+                                            <li><strong>Computador:</strong> Para processar e armazenar</li>
+                                            <li><strong>Software de digitalização:</strong> Para organizar e nomear
+                                                arquivos</li>
+                                            <li><strong>HD externo/Cloud:</strong> Para backup e armazenamento seguro
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="preparation-checklist">
+                                        <h4>📋 Checklist de Preparação:</h4>
+                                        <div class="checklist">
+                                            <label><input type="checkbox"> Remover clipes, grampos e adesivos</label>
+                                            <label><input type="checkbox"> Limpar documentos de poeira</label>
+                                            <label><input type="checkbox"> Endireitar páginas amassadas</label>
+                                            <label><input type="checkbox"> Organizar por tipo e data</label>
+                                            <label><input type="checkbox"> Verificar configurações do scanner</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="tip-box">
+                                        <h4>💡 Dica Importante:</h4>
+                                        <p>Sempre mantenha os documentos originais organizados até confirmar que as
+                                            cópias digitais estão íntegras e legíveis.</p>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="1" data-module="4">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="2" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h3>Configurações e Formatos</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Dominar as configurações ideais para diferentes tipos
+                                        de documentos.</p>
+
+                                    <div class="settings-guide">
+                                        <h4>⚙️ Configurações Recomendadas:</h4>
+                                        <div class="settings-grid">
+                                            <div class="setting-card">
+                                                <h5>📄 Documentos de Texto</h5>
+                                                <ul>
+                                                    <li><strong>Resolução:</strong> 300 DPI</li>
+                                                    <li><strong>Formato:</strong> PDF</li>
+                                                    <li><strong>Cor:</strong> Preto e branco</li>
+                                                    <li><strong>Qualidade:</strong> Padrão</li>
+                                                </ul>
+                                            </div>
+                                            <div class="setting-card">
+                                                <h5>🖼️ Documentos com Imagens</h5>
+                                                <ul>
+                                                    <li><strong>Resolução:</strong> 600 DPI</li>
+                                                    <li><strong>Formato:</strong> PDF ou JPG</li>
+                                                    <li><strong>Cor:</strong> Colorido</li>
+                                                    <li><strong>Qualidade:</strong> Alta</li>
+                                                </ul>
+                                            </div>
+                                            <div class="setting-card">
+                                                <h5>📋 Documentos Legais</h5>
+                                                <ul>
+                                                    <li><strong>Resolução:</strong> 400 DPI</li>
+                                                    <li><strong>Formato:</strong> PDF</li>
+                                                    <li><strong>Cor:</strong> Preto e branco</li>
+                                                    <li><strong>Qualidade:</strong> Alta</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="naming-convention">
+                                        <h4>🏷️ Padrão de Nomenclatura:</h4>
+                                        <p>Use o formato: <strong>AAAAMMDD_TipoDocumento_Descrição.pdf</strong></p>
+                                        <div class="naming-examples">
+                                            <p><strong>Exemplo 1:</strong> 20240315_Contrato_PrestacaoServicos.pdf</p>
+                                            <p><strong>Exemplo 2:</strong> 20240320_NotaFiscal_CompraMaterial.pdf</p>
+                                            <p><strong>Exemplo 3:</strong> 20240325_Relatorio_VendasTrimestre.pdf</p>
+                                        </div>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="2" data-module="4">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="3" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h3>Organização e Armazenamento</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Criar um sistema eficiente de organização e backup dos
+                                        documentos digitalizados.</p>
+
+                                    <div class="storage-methods">
+                                        <div class="method-card">
+                                            <h4>💾 Estrutura de Pastas</h4>
+                                            <ol>
+                                                <li>Crie pastas por ano (Ex: 2024)</li>
+                                                <li>Dentro de cada ano, crie pastas por mês (Ex: 03_Março)</li>
+                                                <li>Organize por tipo de documento (Contratos, Faturas, etc.)</li>
+                                                <li>Use subpastas para projetos específicos</li>
+                                            </ol>
+                                        </div>
+
+                                        <div class="method-card">
+                                            <h4>☁️ Backup em Nuvem</h4>
+                                            <ol>
+                                                <li>Escolha um serviço confiável (Google Drive, OneDrive, etc.)</li>
+                                                <li>Configure sincronização automática</li>
+                                                <li>Mantenha versões anteriores por segurança</li>
+                                                <li>Proteja com senha e autenticação em dois fatores</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="security-tips">
+                                        <h4>🔒 Dicas de Segurança:</h4>
+                                        <ul>
+                                            <li>Use senhas fortes para arquivos sensíveis</li>
+                                            <li>Faça backup em pelo menos dois locais diferentes</li>
+                                            <li>Mantenha antivírus atualizado</li>
+                                            <li>Controle o acesso com permissões específicas</li>
+                                            <li>Exclua cópias desnecessárias</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="quality-checklist">
+                                        <h4>✅ Checklist de Qualidade:</h4>
+                                        <div class="checklist">
+                                            <label><input type="checkbox"> Todas as páginas foram digitalizadas</label>
+                                            <label><input type="checkbox"> Imagens estão legíveis e nítidas</label>
+                                            <label><input type="checkbox"> Nomes dos arquivos seguem o padrão</label>
+                                            <label><input type="checkbox"> Documentos estão nas pastas corretas</label>
+                                            <label><input type="checkbox"> Backup foi realizado com sucesso</label>
+                                        </div>
+                                    </div>
+
+                                    <button class="complete-module-btn" data-module="4">✅ Concluir Módulo 4</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 5: Gestão de Recursos Humanos -->
+                    <div id="module5" class="module-content">
+                        <div class="module-header">
+                            <h2>👥 Módulo 5: Gestão de Recursos Humanos</h2>
+                            <div class="module-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="lesson-container">
+                            <div class="lesson-step" data-step="1">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h3>Documentação de Funcionários</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Conhecer os principais documentos necessários para
+                                        gestão de pessoal.</p>
+
+                                    <div class="documentation-guide">
+                                        <h4>📑 Documentos Obrigatórios:</h4>
+                                        <div class="document-grid">
+                                            <div class="doc-category">
+                                                <h5>📝 Admissão</h5>
+                                                <ul>
+                                                    <li>CTPS - Carteira de Trabalho</li>
+                                                    <li>RG e CPF</li>
+                                                    <li>Comprovante de residência</li>
+                                                    <li>PIS/PASEP</li>
+                                                    <li>Título de eleitor</li>
+                                                    <li>Certificado militar</li>
+                                                </ul>
+                                            </div>
+                                            <div class="doc-category">
+                                                <h5>📊 Durante o Contrato</h5>
+                                                <ul>
+                                                    <li>Contrato de trabalho</li>
+                                                    <li>Folha de ponto</li>
+                                                    <li>Atestados médicos</li>
+                                                    <li>Comprovantes de vale-transporte</li>
+                                                    <li>Recibos de pagamento</li>
+                                                </ul>
+                                            </div>
+                                            <div class="doc-category">
+                                                <h5>📤 Rescisão</h5>
+                                                <ul>
+                                                    <li>Termo de rescisão</li>
+                                                    <li>Recibo de quitação</li>
+                                                    <li>Comunicação ao sindicato</li>
+                                                    <li>Guia de FGTS</li>
+                                                    <li>Comprovante de aviso prévio</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="retention-rules">
+                                        <h4>⏱️ Prazos de Guarda:</h4>
+                                        <ul>
+                                            <li><strong>5 anos:</strong> Documentos fiscais e trabalhistas</li>
+                                            <li><strong>10 anos:</strong> Livros e registros contábeis</li>
+                                            <li><strong>20 anos:</strong> Acidentes de trabalho</li>
+                                            <li><strong>30 anos:</strong> Fundo de Garantia</li>
+                                            <li><strong>Indeterminado:</strong> Documentos permanentes</li>
+                                        </ul>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="1" data-module="5">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="2" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h3>Processos Administrativos</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Dominar os principais processos da área de recursos
+                                        humanos.</p>
+
+                                    <div class="process-guide">
+                                        <div class="process-card">
+                                            <h4>📥 Processo de Admissão</h4>
+                                            <ol>
+                                                <li>Receber e verificar documentação</li>
+                                                <li>Registrar na CTPS</li>
+                                                <li>Cadastrar no eSocial</li>
+                                                <li>Emitir contracheque</li>
+                                                <li>Arquivar documentos</li>
+                                            </ol>
+                                        </div>
+
+                                        <div class="process-card">
+                                            <h4>📤 Processo de Demissão</h4>
+                                            <ol>
+                                                <li>Calcular verbas rescisórias</li>
+                                                <li>Emitir documentos</li>
+                                                <li>Comunicar ao sindicato</li>
+                                                <li>Proceder com pagamentos</li>
+                                                <li>Arquivar documentação</li>
+                                            </ol>
+                                        </div>
+
+                                        <div class="process-card">
+                                            <h4>📋 Folha de Pagamento</h4>
+                                            <ol>
+                                                <li>Coletar dados de ponto</li>
+                                                <li>Calcular horas extras</li>
+                                                <li>Descontar faltas e atrasos</li>
+                                                <li>Calcular benefícios</li>
+                                                <li>Emitir holerites</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="compliance-tips">
+                                        <h4>⚖️ Dicas de Conformidade:</h4>
+                                        <ul>
+                                            <li>Mantenha sempre os prazos legais</li>
+                                            <li>Verifique atualizações na CLT</li>
+                                            <li>Documente todos os processos</li>
+                                            <li>Tenha controle de versões</li>
+                                            <li>Faça auditorias periódicas</li>
+                                        </ul>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="2" data-module="5">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="3" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h3>Comunicação e Relacionamento</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Desenvolver habilidades de comunicação para um bom
+                                        relacionamento com os colaboradores.</p>
+
+                                    <div class="communication-skills">
+                                        <div class="skill-section">
+                                            <h4>🗣️ Comunicação Eficaz</h4>
+                                            <div class="skill-points">
+                                                <div class="skill-item">
+                                                    <span class="skill-icon">👂</span>
+                                                    <div>
+                                                        <strong>Escuta Ativa</strong>
+                                                        <p>Ouça com atenção e demonstre interesse genuíno</p>
+                                                    </div>
+                                                </div>
+                                                <div class="skill-item">
+                                                    <span class="skill-icon">💬</span>
+                                                    <div>
+                                                        <strong>Clareza</strong>
+                                                        <p>Seja direto e use linguagem acessível</p>
+                                                    </div>
+                                                </div>
+                                                <div class="skill-item">
+                                                    <span class="skill-icon">🤝</span>
+                                                    <div>
+                                                        <strong>Empatia</strong>
+                                                        <p>Coloque-se no lugar do outro para entender suas necessidades
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="skill-section">
+                                            <h4>📞 Situações Especiais</h4>
+                                            <div class="situation-guide">
+                                                <div class="situation-item">
+                                                    <h5>Feedback Construtivo</h5>
+                                                    <p><strong>Abordagem:</strong> Foque no comportamento, não na
+                                                        pessoa. Seja específico e ofereça sugestões de melhoria.</p>
+                                                </div>
+                                                <div class="situation-item">
+                                                    <h5>Resolução de Conflitos</h5>
+                                                    <p><strong>Abordagem:</strong> Ouça todas as partes, identifique a
+                                                        causa raiz e busque soluções conjuntas.</p>
+                                                </div>
+                                                <div class="situation-item">
+                                                    <h5>Comunicação de Más Notícias</h5>
+                                                    <p><strong>Abordagem:</strong> Seja direto mas empático, ofereça
+                                                        suporte e explique os próximos passos.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="confidentiality-reminder">
+                                        <h4>🔐 Confidencialidade</h4>
+                                        <p>Todas as informações sobre funcionários são <strong>estritamente
+                                                confidenciais</strong>. Mantenha sigilo absoluto sobre:</p>
+                                        <ul>
+                                            <li>Salários e benefícios</li>
+                                            <li>Avaliações de desempenho</li>
+                                            <li>Problemas de saúde</li>
+                                            <li>Situações disciplinares</li>
+                                            <li>Dados pessoais em geral</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="professional-checklist">
+                                        <h4>✅ Checklist Profissional:</h4>
+                                        <div class="checklist">
+                                            <label><input type="checkbox"> Documentação organizada e atualizada</label>
+                                            <label><input type="checkbox"> Prazos legais sendo cumpridos</label>
+                                            <label><input type="checkbox"> Comunicação clara e eficaz</label>
+                                            <label><input type="checkbox"> Sigilo mantido adequadamente</label>
+                                            <label><input type="checkbox"> Relacionamento profissional com todos</label>
+                                        </div>
+                                    </div>
+
+                                    <button class="complete-module-btn" data-module="5">✅ Concluir Módulo 5</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 6: TOTVS RM -->
+                    <div id="module6" class="module-content">
+                        <div class="module-header">
+                            <h2>💼 Módulo 6: TOTVS RM - Sistema de Gestão</h2>
+                            <div class="module-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="lesson-container">
+                            <div class="lesson-step" data-step="1">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h3>Introdução ao TOTVS RM</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Conhecer os conceitos básicos e estrutura do sistema
+                                        TOTVS RM.</p>
+
+                                    <div class="info-box">
+                                        <h4>🚀 O que é o TOTVS RM?</h4>
+                                        <p>O TOTVS RM é um sistema de gestão empresarial (ERP) que integra todos os
+                                            processos da empresa em uma única plataforma.</p>
+                                        <ul>
+                                            <li><strong>Gestão Financeira:</strong> Contas a pagar/receber, fluxo de
+                                                caixa</li>
+                                            <li><strong>Gestão Comercial:</strong> Vendas, pedidos, estoque</li>
+                                            <li><strong>Gestão de Pessoas:</strong> Folha de pagamento, departamento
+                                                pessoal</li>
+                                            <li><strong>Gestão Fiscal:</strong> Notas fiscais, obrigações acessórias
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="practical-example">
+                                        <h4>💡 Exemplo Prático:</h4>
+                                        <p>Imagine que você precisa:</p>
+                                        <div class="document-examples">
+                                            <div class="doc-item">
+                                                <span class="doc-icon">📊</span>
+                                                <div class="doc-info">
+                                                    <strong>Emitir uma nota fiscal</strong>
+                                                    <p>Processo: Comercial → Fiscal → Financeiro</p>
+                                                </div>
+                                            </div>
+                                            <div class="doc-item">
+                                                <span class="doc-icon">👥</span>
+                                                <div class="doc-info">
+                                                    <strong>Registrar ponto de funcionários</strong>
+                                                    <p>Processo: RH → Folha de pagamento</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="1" data-module="6">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="2" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h3>Navegação e Módulos Principais</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Aprender a navegar pelos principais módulos do
+                                        sistema.</p>
+
+                                    <div class="navigation-guide">
+                                        <h4>🧭 Módulos Principais:</h4>
+                                        <div class="modules-grid">
+                                            <div class="module-item">
+                                                <h5>💰 Financeiro</h5>
+                                                <ul>
+                                                    <li>Contas a pagar</li>
+                                                    <li>Contas a receber</li>
+                                                    <li>Fluxo de caixa</li>
+                                                    <li>Bancos</li>
+                                                </ul>
+                                            </div>
+                                            <div class="module-item">
+                                                <h5>🛒 Comercial</h5>
+                                                <ul>
+                                                    <li>Pedidos de venda</li>
+                                                    <li>Notas fiscais</li>
+                                                    <li>Clientes</li>
+                                                    <li>Estoque</li>
+                                                </ul>
+                                            </div>
+                                            <div class="module-item">
+                                                <h5>👥 Recursos Humanos</h5>
+                                                <ul>
+                                                    <li>Folha de pagamento</li>
+                                                    <li>Ponto eletrônico</li>
+                                                    <li>Admissão/Demissão</li>
+                                                    <li>Férias</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tip-box">
+                                        <h4>💡 Dica de Navegação:</h4>
+                                        <p>Use o menu lateral para acessar rapidamente os módulos. Os atalhos F2
+                                            (pesquisar) e F3 (novo) agilizam o trabalho!</p>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="2" data-module="6">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="3" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h3>Operações Básicas e Relatórios</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Dominar as operações básicas e geração de relatórios.
+                                    </p>
+
+                                    <div class="operations-guide">
+                                        <div class="operation-card">
+                                            <h4>📝 Cadastros Básicos</h4>
+                                            <ol>
+                                                <li>Clientes/Fornecedores</li>
+                                                <li>Produtos/Serviços</li>
+                                                <li>Centro de custos</li>
+                                                <li>Plano de contas</li>
+                                            </ol>
+                                        </div>
+
+                                        <div class="operation-card">
+                                            <h4>📊 Relatórios Essenciais</h4>
+                                            <ol>
+                                                <li>Relatório financeiro</li>
+                                                <li>Posição de estoque</li>
+                                                <li>Folha de pagamento</li>
+                                                <li>Movimento de caixa</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="checklist-box">
+                                        <h4>✅ Checklist de Operações:</h4>
+                                        <div class="checklist">
+                                            <label><input type="checkbox"> Cadastro de cliente realizado</label>
+                                            <label><input type="checkbox"> Pedido de venda emitido</label>
+                                            <label><input type="checkbox"> Nota fiscal gerada</label>
+                                            <label><input type="checkbox"> Relatório financeiro extraído</label>
+                                            <label><input type="checkbox"> Backup do sistema verificado</label>
+                                        </div>
+                                    </div>
+
+                                    <button class="complete-module-btn" data-module="6">✅ Concluir Módulo 6</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 7: Pacote Office -->
+                    <div id="module7" class="module-content">
+                        <div class="module-header">
+                            <h2>📱 Módulo 7: Pacote Office Essencial</h2>
+                            <div class="module-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="lesson-container">
+                            <div class="lesson-step" data-step="1">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h3>Word - Documentos Profissionais</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Dominar a criação de documentos profissionais no Word.
+                                    </p>
+
+                                    <div class="info-box">
+                                        <h4>📄 Funcionalidades Essenciais do Word:</h4>
+                                        <ul>
+                                            <li><strong>Formatação de texto:</strong> Fontes, tamanhos, cores</li>
+                                            <li><strong>Estilos e temas:</strong> Formatação rápida e profissional</li>
+                                            <li><strong>Tabelas e gráficos:</strong> Organização de dados</li>
+                                            <li><strong>Cabeçalho e rodapé:</strong> Informações padronizadas</li>
+                                            <li><strong>Revisão ortográfica:</strong> Correção automática</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="practical-example">
+                                        <h4>💡 Modelo de Documento Profissional:</h4>
+                                        <div class="document-examples">
+                                            <div class="doc-item">
+                                                <span class="doc-icon">📋</span>
+                                                <div class="doc-info">
+                                                    <strong>Relatório Gerencial</strong>
+                                                    <p>Estrutura: Capa, Sumário, Introdução, Desenvolvimento, Conclusão
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="doc-item">
+                                                <span class="doc-icon">📝</span>
+                                                <div class="doc-info">
+                                                    <strong>Ofício/Carta</strong>
+                                                    <p>Estrutura: Cabeçalho, Destinatário, Corpo, Assinatura</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="1" data-module="7">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="2" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h3>Excel - Planilhas e Análise de Dados</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Aprender a criar planilhas e analisar dados no Excel.
+                                    </p>
+
+                                    <div class="excel-guide">
+                                        <h4>📊 Funções Essenciais do Excel:</h4>
+                                        <div class="functions-grid">
+                                            <div class="function-card">
+                                                <h5>🧮 Funções Básicas</h5>
+                                                <ul>
+                                                    <li><strong>SOMA:</strong> =SOMA(A1:A10)</li>
+                                                    <li><strong>MÉDIA:</strong> =MÉDIA(B1:B10)</li>
+                                                    <li><strong>CONT.SE:</strong> =CONT.SE(C1:C10,">100")</li>
+                                                    <li><strong>PROCV:</strong> =PROCV(valor,intervalo,coluna)</li>
+                                                </ul>
+                                            </div>
+                                            <div class="function-card">
+                                                <h5>📈 Ferramentas Avançadas</h5>
+                                                <ul>
+                                                    <li>Tabelas dinâmicas</li>
+                                                    <li>Grifos condicionais</li>
+                                                    <li>Grafícos profissionais</li>
+                                                    <li>Validação de dados</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tip-box">
+                                        <h4>💡 Dica de Produtividade:</h4>
+                                        <p>Use atalhos: Ctrl+C (copiar), Ctrl+V (colar), Ctrl+Z (desfazer), F2 (editar
+                                            célula), Ctrl+; (data atual)</p>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="2" data-module="7">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="3" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h3>PowerPoint e Outlook</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Criar apresentações profissionais e gerenciar e-mails.
+                                    </p>
+
+                                    <div class="office-tools">
+                                        <div class="tool-card">
+                                            <h4>🎤 PowerPoint</h4>
+                                            <div class="tool-content">
+                                                <h5>Estrutura de Apresentação:</h5>
+                                                <ol>
+                                                    <li>Slide de abertura (título)</li>
+                                                    <li>Slide de agenda/objetivos</li>
+                                                    <li>Slides de conteúdo</li>
+                                                    <li>Slide de conclusão</li>
+                                                    <li>Slide de contato/perguntas</li>
+                                                </ol>
+                                                <div class="tool-tips">
+                                                    <p>✅ Use o modo apresentador<br>
+                                                        ✅ Pratique o tempo<br>
+                                                        ✅ Prepare material de apoio</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tool-card">
+                                            <h4>📧 Outlook</h4>
+                                            <div class="tool-content">
+                                                <h5>Organização de E-mail:</h5>
+                                                <ol>
+                                                    <li>Crie pastas por projeto</li>
+                                                    <li>Use regras de organização</li>
+                                                    <li>Configure assinatura profissional</li>
+                                                    <li>Gerencie calendário de reuniões</li>
+                                                </ol>
+                                                <div class="tool-tips">
+                                                    <p>✅ Categorize os e-mails<br>
+                                                        ✅ Use lembretes<br>
+                                                        ✅ Sincronize com calendário</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="integration-tips">
+                                        <h4>🔄 Integração entre Aplicativos:</h4>
+                                        <ul>
+                                            <li>Copie tabelas do Excel para o Word</li>
+                                            <li>Insira gráficos do Excel no PowerPoint</li>
+                                            <li>Agende reuniões pelo Outlook</li>
+                                            <li>Compartilhe arquivos pelo OneDrive</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="checklist-box">
+                                        <h4>✅ Checklist de Habilidades:</h4>
+                                        <div class="checklist">
+                                            <label><input type="checkbox"> Documento Word formatado</label>
+                                            <label><input type="checkbox"> Planilha Excel com fórmulas</label>
+                                            <label><input type="checkbox"> Apresentação PowerPoint criada</label>
+                                            <label><input type="checkbox"> E-mail profissional enviado</label>
+                                            <label><input type="checkbox"> Integração entre apps testada</label>
+                                        </div>
+                                    </div>
+
+                                    <button class="complete-module-btn" data-module="7">✅ Concluir Módulo 7</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Módulo 8: Saúde Mental do Assistente Administrativo -->
+                    <div id="module8" class="module-content">
+                        <div class="module-header">
+                            <h2>🧠 Módulo 8: Saúde Mental no Ambiente Administrativo</h2>
+                            <div class="module-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">0% Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="lesson-container">
+                            <div class="lesson-step" data-step="1">
+                                <div class="step-header">
+                                    <div class="step-number">1</div>
+                                    <h3>Entendendo a Saúde Mental no Trabalho</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Compreender a importância da saúde mental e
+                                        identificar sinais de desgaste no ambiente administrativo.</p>
+
+                                    <div class="info-box">
+                                        <h4>💡 O que é Saúde Mental no Trabalho?</h4>
+                                        <p>É o estado de bem-estar que permite ao profissional lidar com as pressões
+                                            normais do trabalho, ser produtivo e contribuir positivamente para a equipe.
+                                        </p>
+                                        <ul>
+                                            <li><strong>Não é apenas ausência de doença:</strong> É um estado positivo
+                                                de bem-estar</li>
+                                            <li><strong>Impacta a produtividade:</strong> Profissionais saudáveis são
+                                                mais eficientes</li>
+                                            <li><strong>Prevenível:</strong> Pode ser mantida com hábitos saudáveis</li>
+                                            <li><strong>Recuperável:</strong> É possível superar momentos difíceis</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="practical-example">
+                                        <h4>🚨 Sinais de Alerta no Ambiente Administrativo:</h4>
+                                        <div class="document-examples">
+                                            <div class="doc-item">
+                                                <span class="doc-icon">😫</span>
+                                                <div class="doc-info">
+                                                    <strong>Esgotamento Emocional</strong>
+                                                    <p>Cansaço constante, irritabilidade, dificuldade de concentração
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="doc-item">
+                                                <span class="doc-icon">🔄</span>
+                                                <div class="doc-info">
+                                                    <strong>Redução da Performance</strong>
+                                                    <p>Erros frequentes, esquecimentos, queda na produtividade</p>
+                                                </div>
+                                            </div>
+                                            <div class="doc-item">
+                                                <span class="doc-icon">😴</span>
+                                                <div class="doc-info">
+                                                    <strong>Problemas de Sono</strong>
+                                                    <p>Dificuldade para dormir, acordar cansado, pesadelos</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tip-box">
+                                        <h4>🌟 Fatores Protetores:</h4>
+                                        <p>Pausas regulares, organização do trabalho, bom relacionamento com colegas e
+                                            reconhecimento profissional são essenciais para manter a saúde mental!</p>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="1" data-module="8">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="2" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">2</div>
+                                    <h3>Estratégias de Prevenção e Autocuidado</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Aprender técnicas práticas para prevenir o estresse e
+                                        promover o autocuidado no dia a dia.</p>
+
+                                    <div class="prevention-strategies">
+                                        <h4>🛡️ Estratégias de Prevenção no Trabalho:</h4>
+                                        <div class="strategies-grid">
+                                            <div class="strategy-card">
+                                                <h5>⏰ Gestão do Tempo</h5>
+                                                <ul>
+                                                    <li>Use a técnica Pomodoro (25min trabalho + 5min pausa)</li>
+                                                    <li>Priorize tarefas importantes</li>
+                                                    <li>Estabeleça prazos realistas</li>
+                                                    <li>Aprenda a dizer "não" quando necessário</li>
+                                                </ul>
+                                            </div>
+                                            <div class="strategy-card">
+                                                <h5>💻 Ergonomia e Ambiente</h5>
+                                                <ul>
+                                                    <li>Ajuste cadeira e monitor corretamente</li>
+                                                    <li>Mantenha o ambiente organizado</li>
+                                                    <li>Use iluminação adequada</li>
+                                                    <li>Faça pausas para alongar</li>
+                                                </ul>
+                                            </div>
+                                            <div class="strategy-card">
+                                                <h5>🧘‍♀️ Pausas Ativas</h5>
+                                                <ul>
+                                                    <li>Levante-se a cada hora</li>
+                                                    <li>Respire profundamente 3x ao dia</li>
+                                                    <li>Alongue pescoço e ombros</li>
+                                                    <li>Beba água regularmente</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="self-care-routine">
+                                        <h4>❤️ Rotina de Autocuidado Diário:</h4>
+                                        <div class="routine-schedule">
+                                            <div class="time-slot">
+                                                <strong>Manhã (antes do trabalho):</strong>
+                                                <p>10min de alongamento + café da manhã nutritivo + planejamento do dia
+                                                </p>
+                                            </div>
+                                            <div class="time-slot">
+                                                <strong>Durante o trabalho:</strong>
+                                                <p>Pausas a cada 2h + hidratação + respiração consciente</p>
+                                            </div>
+                                            <div class="time-slot">
+                                                <strong>Noite (após o trabalho):</strong>
+                                                <p>Desconexão digital + atividade prazerosa + rotina de sono</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="emergency-techniques">
+                                        <h4>🆊 Técnicas de Emergência para Momentos de Estresse:</h4>
+                                        <div class="techniques-list">
+                                            <div class="technique-item">
+                                                <span class="technique-icon">🌬️</span>
+                                                <div>
+                                                    <strong>Respiração 4-7-8</strong>
+                                                    <p>Inspire 4s, segure 7s, expire 8s. Repita 3x</p>
+                                                </div>
+                                            </div>
+                                            <div class="technique-item">
+                                                <span class="technique-icon">🚶‍♀️</span>
+                                                <div>
+                                                    <strong>Pausa de 5 Minutos</strong>
+                                                    <p>Levante, caminhe, beba água, mude de ambiente</p>
+                                                </div>
+                                            </div>
+                                            <div class="technique-item">
+                                                <span class="technique-icon">📝</span>
+                                                <div>
+                                                    <strong>Anotação Rápida</strong>
+                                                    <p>Escreva o que está sentindo em um post-it</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="next-step-btn" data-step="2" data-module="8">Próximo Passo →</button>
+                                </div>
+                            </div>
+
+                            <div class="lesson-step" data-step="3" style="display: none;">
+                                <div class="step-header">
+                                    <div class="step-number">3</div>
+                                    <h3>Construindo Resiliência e Buscando Apoio</h3>
+                                </div>
+                                <div class="step-content">
+                                    <p><strong>Objetivo:</strong> Desenvolver resiliência emocional e saber quando e
+                                        como buscar ajuda profissional.</p>
+
+                                    <div class="resilience-building">
+                                        <div class="resilience-card">
+                                            <h4>💪 Desenvolvendo Resiliência</h4>
+                                            <div class="resilience-content">
+                                                <h5>Pilares da Resiliência Profissional:</h5>
+                                                <ol>
+                                                    <li><strong>Autoconhecimento:</strong> Reconheça seus limites e
+                                                        emoções</li>
+                                                    <li><strong>Flexibilidade:</strong> Adapte-se às mudanças</li>
+                                                    <li><strong>Otimismo realista:</strong> Veja desafios como
+                                                        oportunidades</li>
+                                                    <li><strong>Suporte social:</strong> Mantenha boas relações no
+                                                        trabalho</li>
+                                                    <li><strong>Propósito:</strong> Conecte-se com o significado do seu
+                                                        trabalho</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+
+                                        <div class="support-card">
+                                            <h4>🤝 Quando e Como Buscar Ajuda</h4>
+                                            <div class="support-content">
+                                                <h5>Sinais de que Precisa de Apoio Profissional:</h5>
+                                                <ul>
+                                                    <li>Sintomas persistem por mais de 2 semanas</li>
+                                                    <li>Dificuldade para realizar tarefas simples</li>
+                                                    <li>Isolamento social no trabalho</li>
+                                                    <li>Pensamentos negativos constantes</li>
+                                                    <li>Alterações no apetite ou sono</li>
+                                                </ul>
+
+                                                <div class="support-channels">
+                                                    <h5>Canais de Apoio Disponíveis:</h5>
+                                                    <div class="channels-list">
+                                                        <div class="channel-item">
+                                                            <strong>CVV - Centro de Valorização da Vida</strong>
+                                                            <p>📞 188 (24h) | 💬 Chat online</p>
+                                                        </div>
+                                                        <div class="channel-item">
+                                                            <strong>Psicólogo do Trabalho</strong>
+                                                            <p>👥 Atendimento pela empresa ou particular</p>
+                                                        </div>
+                                                        <div class="channel-item">
+                                                            <strong>Médico do Trabalho</strong>
+                                                            <p>🏥 Avaliação de saúde ocupacional</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mental-health-plan">
+                                        <h4>📋 Plano Pessoal de Saúde Mental</h4>
+                                        <div class="plan-template">
+                                            <div class="plan-section">
+                                                <h5>✅ Meus Sinais de Alerta Pessoais:</h5>
+                                                <div class="editable-area" contenteditable="true">
+                                                    • Irritabilidade com colegas<br>
+                                                    • Dificuldade para focar<br>
+                                                    • Cansaço excessivo<br>
+                                                    • ...
+                                                </div>
+                                            </div>
+
+                                            <div class="plan-section">
+                                                <h5>🛡️ Minhas Estratégias de Prevenção:</h5>
+                                                <div class="editable-area" contenteditable="true">
+                                                    • Pausa para alongamento às 10h e 15h<br>
+                                                    • Respiração consciente antes de reuniões<br>
+                                                    • Organização da mesa toda sexta-feira<br>
+                                                    • ...
+                                                </div>
+                                            </div>
+
+                                            <div class="plan-section">
+                                                <h5>🆘 Meus Contatos de Apoio:</h5>
+                                                <div class="editable-area" contenteditable="true">
+                                                    • Colega de confiança: [Nome]<br>
+                                                    • Psicólogo: [Contato]<br>
+                                                    • Familiar: [Nome]<br>
+                                                    • ...
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="final-reflection">
+                                        <h4>🌱 Compromisso com Sua Saúde Mental</h4>
+                                        <p>Lembre-se: cuidar da sua saúde mental não é um luxo, é uma necessidade
+                                            profissional. Um assistente administrativo mentalmente saudável é mais
+                                            produtivo, criativo e contribui positivamente para o ambiente de trabalho.
+                                        </p>
+
+                                        <div class="affirmation">
+                                            <p><strong>💫 Afirmação Positiva:</strong><br>
+                                                "Eu mereço cuidar da minha saúde mental. Minha produtividade e bem-estar
+                                                caminham juntos. Sou capaz de reconhecer meus limites e buscar ajuda
+                                                quando necessário."</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="checklist-box">
+                                        <h4>✅ Checklist de Saúde Mental:</h4>
+                                        <div class="checklist">
+                                            <label><input type="checkbox"> Identifiquei meus sinais de alerta
+                                                pessoais</label>
+                                            <label><input type="checkbox"> Estabeleci uma rotina de pausas no
+                                                trabalho</label>
+                                            <label><input type="checkbox"> Aprendi técnicas de respiração para
+                                                emergências</label>
+                                            <label><input type="checkbox"> Criei meu plano pessoal de saúde
+                                                mental</label>
+                                            <label><input type="checkbox"> Sei quando e como buscar ajuda
+                                                profissional</label>
+                                        </div>
+                                    </div>
+
+                                    <button class="complete-module-btn" data-module="8">✅ Concluir Módulo 8</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Certificado de Conclusão -->
+                    <div id="certificate" class="certificate-container" style="display: none;">
+                        <div class="certificate">
+                            <div class="certificate-header">
+                                <h1>🏆 CERTIFICADO DE CONCLUSÃO</h1>
+                                <div class="certificate-logo">🎓</div>
+                            </div>
+                            <div class="certificate-body">
+                                <p class="certificate-text">Certificamos que o </p>
+                                <h2 class="certificate-name">Assistente Administrativo</h2>
+                                <p class="certificate-text">concluiu com sucesso o</p>
+                                <h3 class="certificate-course">E-book: Guia Completo de Atividades Administrativas</h3>
+                                <div class="certificate-modules">
+                                    <p>✅ Módulo 1: Organização de Documentos</p>
+                                    <p>✅ Módulo 2: Atendimento Telefônico</p>
+                                    <p>✅ Módulo 3: E-mails Profissionais</p>
+                                    <p>✅ Módulo 4: Digitalização de Documentos</p>
+                                    <p>✅ Módulo 5: Gestão de Recursos Humanos</p>
+                                    <p>✅ Módulo 6: Gestão de Recursos Humanos</p>
+                                    <p>✅ Módulo 6: TOTVS RM - Sistema de Gestão</p>
+                                    <p>✅ Módulo 7: Pacote Office Essencial</p>
+                                    <p>✅ Módulo 8: Saúde Mental no Ambiente Administrativo</p>
+                                </div>
+                                <div class="certificate-date">
+                                    <p>Data de conclusão: <span id="completionDate"></span></p>
+                                </div>
+                            </div>
+                            <div class="certificate-footer">
+                                <div class="certificate-signature">
+                                    <p>HELP ADM<br>Comunidade de Treinamento</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="download-certificate-btn" id="downloadCertificate">
+                            📥 Baixar Certificado
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Seção Comunidade -->
+                <div id="community" class="section-content">
+                    <h2>👥 Comunidade</h2>
+                    <p>Conheça outros membros, participe de eventos e fortaleça nossa comunidade.</p>
+                </div>
+
+                <!-- Seção Anúncios -->
+                <!-- Seção Anúncios -->
+<div id="announcements" class="section-content">
+    <div class="announcements-header">
+        <h2>📢 Central de Informações - Assistente Administrativo</h2>
+        <p>Fique por dentro das últimas novidades, atualizações e informações relevantes para sua carreira</p>
+    </div>
+
+    <!-- Filtros de Categoria -->
+    <div class="announcements-filter">
+        <button class="filter-btn active" data-filter="all">📰 Todos</button>
+        <button class="filter-btn" data-filter="legislacao">⚖️ Legislação</button>
+        <button class="filter-btn" data-filter="tecnologia">💻 Tecnologia</button>
+        <button class="filter-btn" data-filter="carreira">🚀 Carreira</button>
+        <button class="filter-btn" data-filter="feriados">📅 Feriados</button>
+        <button class="filter-btn" data-filter="cursos">🎓 Cursos</button>
+    </div>
+
+    <!-- Destaques -->
+    <div class="highlights-grid">
+        <div class="highlight-card main-highlight">
+            <div class="highlight-badge">🔥 Destaque</div>
+            <div class="highlight-content">
+                <h3>Nova Lei Trabalhista 2024 - O que muda para o administrativo?</h3>
+                <p class="highlight-excerpt">Mudanças na jornada de trabalho, home office e direitos digitais. Saiba como se adaptar às novas regulamentações.</p>
+                <div class="highlight-meta">
+                    <span class="date">📅 15 Mar 2024</span>
+                    <span class="reading-time">⏱️ 5 min leitura</span>
+                </div>
+                <button class="read-more-btn" data-article="lei-trabalhista">Ler Mais →</button>
+            </div>
+            <div class="highlight-image">
+                <div class="image-placeholder">⚖️</div>
+            </div>
+        </div>
+
+        <div class="highlight-sidebar">
+            <div class="side-highlight">
+                <span class="urgency-badge">🟢 Urgente</span>
+                <h4>eSocial: Novas obrigações para Março</h4>
+                <p>Prazo até 25/03 para envio de eventos</p>
+            </div>
+            <div class="side-highlight">
+                <span class="trending-badge">📈 Trending</span>
+                <h4>IA no administrativo: Ferramentas gratuitas</h4>
+                <p>ChatGPT, Copilot e outras soluções</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de Anúncios -->
+    <div class="announcements-grid">
+        
+        <!-- Categoria: Legislação -->
+        <div class="announcement-card" data-category="legislacao">
+            <div class="card-header">
+                <span class="category-badge legislacao">⚖️ Legislação</span>
+                <span class="priority high">Alta Prioridade</span>
+            </div>
+            <h3>Mudanças no FGTS - Como afeta o cálculo rescisório</h3>
+            <p class="card-excerpt">Novas regras para saque do FGTS e impactos nos cálculos de rescisão contratual. Atualize suas planilhas!</p>
+            <div class="card-meta">
+                <div class="meta-left">
+                    <span class="date">📅 12 Mar 2024</span>
+                    <span class="author">Por: Departamento Pessoal</span>
+                </div>
+                <div class="meta-right">
+                    <span class="views">👁️ 2.3K</span>
+                    <span class="comments">💬 47</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="save-btn" data-article="fgts">📌 Salvar</button>
+                <button class="share-btn" data-article="fgts">↗ Compartilhar</button>
+            </div>
+        </div>
+
+        <!-- Categoria: Tecnologia -->
+        <div class="announcement-card" data-category="tecnologia">
+            <div class="card-header">
+                <span class="category-badge tecnologia">💻 Tecnologia</span>
+                <span class="priority medium">Média Prioridade</span>
+            </div>
+            <h3>Microsoft anuncia novo Pacote Office 2024</h3>
+            <p class="card-excerpt">Novas funcionalidades no Excel, Word e PowerPoint. Atualizações gratuitas para assinantes do 365.</p>
+            <div class="card-meta">
+                <div class="meta-left">
+                    <span class="date">📅 10 Mar 2024</span>
+                    <span class="author">Por: TI Corporativo</span>
+                </div>
+                <div class="meta-right">
+                    <span class="views">👁️ 1.8K</span>
+                    <span class="comments">💬 32</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="save-btn" data-article="office-2024">📌 Salvar</button>
+                <button class="share-btn" data-article="office-2024">↗ Compartilhar</button>
+            </div>
+        </div>
+
+        <!-- Categoria: Carreira -->
+        <div class="announcement-card" data-category="carreira">
+            <div class="card-header">
+                <span class="category-badge carreira">🚀 Carreira</span>
+                <span class="priority high">Alta Prioridade</span>
+            </div>
+            <h3>Salários 2024: Média sobe 8.5% para administrativos</h3>
+            <p class="card-excerpt">Pesquisa nacional revela novas faixas salariais. Saiba como negociar sua remuneração.</p>
+            <div class="card-meta">
+                <div class="meta-left">
+                    <span class="date">📅 08 Mar 2024</span>
+                    <span class="author">Por: RH Nacional</span>
+                </div>
+                <div class="meta-right">
+                    <span class="views">👁️ 3.1K</span>
+                    <span class="comments">💬 89</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="save-btn" data-article="salarios-2024">📌 Salvar</button>
+                <button class="share-btn" data-article="salarios-2024">↗ Compartilhar</button>
+            </div>
+        </div>
+
+        <!-- Categoria: Feriados -->
+        <div class="announcement-card" data-category="feriados">
+            <div class="card-header">
+                <span class="category-badge feriados">📅 Feriados</span>
+                <span class="priority low">Baixa Prioridade</span>
+            </div>
+            <h3>Calendário de Feriados 2024 - Pontes facultativos</h3>
+            <p class="card-excerpt">Lista completa dos feriados nacionais e possíveis pontes. Planeje suas demandas!</p>
+            <div class="card-meta">
+                <div class="meta-left">
+                    <span class="date">📅 05 Mar 2024</span>
+                    <span class="author">Por: Gestão</span>
+                </div>
+                <div class="meta-right">
+                    <span class="views">👁️ 1.2K</span>
+                    <span class="comments">💬 15</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="save-btn" data-article="feriados-2024">📌 Salvar</button>
+                <button class="share-btn" data-article="feriados-2024">↗ Compartilhar</button>
+            </div>
+        </div>
+
+        <!-- Categoria: Cursos -->
+        <div class="announcement-card" data-category="cursos">
+            <div class="card-header">
+                <span class="category-badge cursos">🎓 Cursos</span>
+                <span class="priority medium">Média Prioridade</span>
+            </div>
+            <h3>Certificação Gratuita: Power BI para Administrativos</h3>
+            <p class="card-excerpt">Microsoft oferece curso gratuito com certificação. Inscrições abertas até 30/03.</p>
+            <div class="card-meta">
+                <div class="meta-left">
+                    <span class="date">📅 03 Mar 2024</span>
+                    <span class="author">Por: Desenvolvimento</span>
+                </div>
+                <div class="meta-right">
+                    <span class="views">👁️ 2.7K</span>
+                    <span class="comments">💬 156</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="save-btn" data-article="power-bi">📌 Salvar</button>
+                <button class="share-btn" data-article="power-bi">↗ Compartilhar</button>
+            </div>
+        </div>
+
+        <!-- Mais Anúncios -->
+        <div class="announcement-card" data-category="tecnologia">
+            <div class="card-header">
+                <span class="category-badge tecnologia">💻 Tecnologia</span>
+                <span class="priority high">Alta Prioridade</span>
+            </div>
+            <h3>Backup em Nuvem: Nova política corporativa</h3>
+            <p class="card-excerpt">Mudanças no sistema de backup. Todos os administrativos devem atualizar procedimentos até 20/03.</p>
+            <div class="card-meta">
+                <div class="meta-left">
+                    <span class="date">📅 01 Mar 2024</span>
+                    <span class="author">Por: Segurança da Informação</span>
+                </div>
+                <div class="meta-right">
+                    <span class="views">👁️ 1.5K</span>
+                    <span class="comments">💬 28</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="save-btn" data-article="backup-cloud">📌 Salvar</button>
+                <button class="share-btn" data-article="backup-cloud">↗ Compartilhar</button>
+            </div>
+        </div>
+
+        <div class="announcement-card" data-category="legislacao">
+            <div class="card-header">
+                <span class="category-badge legislacao">⚖️ Legislação</span>
+                <span class="priority medium">Média Prioridade</span>
+            </div>
+            <h3>Novo modelo de contrato de experiência</h3>
+            <p class="card-excerpt">Adaptações necessárias devido às mudanças na CLT. Modelos disponíveis para download.</p>
+            <div class="card-meta">
+                <div class="meta-left">
+                    <span class="date">📅 28 Fev 2024</span>
+                    <span class="author">Por: Jurídico</span>
+                </div>
+                <div class="meta-right">
+                    <span class="views">👁️ 1.9K</span>
+                    <span class="comments">💬 41</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="save-btn" data-article="contrato-experiencia">📌 Salvar</button>
+                <button class="share-btn" data-article="contrato-experiencia">↗ Compartilhar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar de Informações Rápidas -->
+    <div class="announcements-sidebar">
+        <div class="sidebar-card">
+            <h4>📊 Estatísticas do Mês</h4>
+            <div class="stats-mini">
+                <div class="stat-mini">
+                    <span class="stat-number">47</span>
+                    <span class="stat-label">Novos Anúncios</span>
+                </div>
+                <div class="stat-mini">
+                    <span class="stat-number">89%</span>
+                    <span class="stat-label">Leitura</span>
+                </div>
+                <div class="stat-mini">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Urgentes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-card">
+            <h4>🔔 Lembretes Importantes</h4>
+            <div class="reminders-list">
+                <div class="reminder-item urgent">
+                    <span class="reminder-icon">⏰</span>
+                    <div>
+                        <strong>Entrega do eSocial</strong>
+                        <p>Prazo: 25/03/2024</p>
+                    </div>
+                </div>
+                <div class="reminder-item">
+                    <span class="reminder-icon">📋</span>
+                    <div>
+                        <strong>Inventário Trimestral</strong>
+                        <p>Início: 01/04/2024</p>
+                    </div>
+                </div>
+                <div class="reminder-item">
+                    <span class="reminder-icon">💰</span>
+                    <div>
+                        <strong>Folha de Pagamento</strong>
+                        <p>Fechamento: 28/03/2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-card">
+            <h4>📈 Top Leituras</h4>
+            <div class="top-reads">
+                <div class="read-item">
+                    <span class="read-rank">1</span>
+                    <div class="read-info">
+                        <strong>Salários 2024</strong>
+                        <p>3.1K visualizações</p>
+                    </div>
+                </div>
+                <div class="read-item">
+                    <span class="read-rank">2</span>
+                    <div class="read-info">
+                        <strong>Nova Lei Trabalhista</strong>
+                        <p>2.8K visualizações</p>
+                    </div>
+                </div>
+                <div class="read-item">
+                    <span class="read-rank">3</span>
+                    <div class="read-info">
+                        <strong>Curso Power BI</strong>
+                        <p>2.7K visualizações</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Artigo -->
+    <div id="articleModal" class="article-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="articleTitle">Título do Artigo</h3>
+                <button class="close-article-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="article-meta-modal">
+                    <span id="articleCategory" class="category-badge">Categoria</span>
+                    <span id="articleDate" class="date">📅 Data</span>
+                    <span id="articleAuthor" class="author">Por: Autor</span>
+                </div>
+                <div class="article-content">
+                    <p id="articleFullContent">Conteúdo completo do artigo...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="article-actions">
+                    <button class="download-btn">📥 Baixar PDF</button>
+                    <button class="print-btn">🖨️ Imprimir</button>
+                    <button class="share-article-btn">↗ Compartilhar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <div class="sidebar-title">
+                        🟢 Usuários Online (156)
+                    </div>
+                    <div class="online-users">
+                        <div class="user-item">
+                            <div class="user-avatar">AS</div>
+                            <div class="user-info">
+                                <div class="user-name">Admin Suporte</div>
+                                <div class="user-status">Online agora</div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="user-avatar">TH</div>
+                            <div class="user-info">
+                                <div class="user-name">Tech Helper</div>
+                                <div class="user-status">Online agora</div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="user-avatar">UF</div>
+                            <div class="user-info">
+                                <div class="user-name">User Feedback</div>
+                                <div class="user-status">Online agora</div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="user-avatar">CS</div>
+                            <div class="user-info">
+                                <div class="user-name">Community Star</div>
+                                <div class="user-status">Online agora</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-title">
+                        📊 Estatísticas da Semana
+                    </div>
+                    <div class="stats-list">
+                        <div class="stat-item">
+                            <span>Novos tópicos:</span>
+                            <strong style="color: #ff6b35;">47</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Respostas:</span>
+                            <strong style="color: #ff6b35;">234</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Novos membros:</span>
+                            <strong style="color: #ff6b35;">18</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Problemas resolvidos:</span>
+                            <strong style="color: #27ae60;">89</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-title">
+                        🏆 Top Colaboradores
+                    </div>
+                    <div class="top-contributors">
+                        <div class="contributor-item">
+                            <div class="user-avatar">🥇</div>
+                            <div>
+                                <div class="contributor-name">SuperHelper</div>
+                                <div class="contributor-stats">127 soluções</div>
+                            </div>
+                        </div>
+                        <div class="contributor-item">
+                            <div class="user-avatar">🥈</div>
+                            <div>
+                                <div class="contributor-name">TechGuru</div>
+                                <div class="contributor-stats">89 soluções</div>
+                            </div>
+                        </div>
+                        <div class="contributor-item">
+                            <div class="user-avatar">🥉</div>
+                            <div>
+                                <div class="contributor-name">HelpMaster</div>
+                                <div class="contributor-stats">67 soluções</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão Flutuante -->
+        <button class="floating-btn" id="newPostBtn" title="Iniciar Nova Conversa">
+            ✏️
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
